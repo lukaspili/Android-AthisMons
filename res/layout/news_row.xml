@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent" android:layout_height="wrap_content"
+                android:padding="5dip">
+
+    <ImageView android:id="@+id/news_row_image"
+               android:layout_width="75dip" android:layout_height="74dip"
+               android:layout_alignParentTop="true"
+               android:layout_marginRight="5dip"
+               android:scaleType="fitCenter"
+               android:src="@drawable/news_row_defautl"/>
+
+    <ImageView android:id="@+id/news_row_indicator"
+               android:layout_width="wrap_content" android:layout_height="wrap_content"
+               android:layout_alignParentRight="true"
+               android:layout_centerVertical="true"
+               android:src="@drawable/ic_row_right"/>
+
+    <TextView android:id="@+id/news_row_category"
+              android:layout_width="fill_parent" android:layout_height="wrap_content"
+              android:layout_alignTop="@id/news_row_image"
+              android:layout_toRightOf="@id/news_row_image"
+              android:layout_toLeftOf="@id/news_row_indicator"
+              android:textSize="13sp"
+              android:textColor="@color/red"
+              android:text="content"/>
+
+    <TextView android:id="@+id/news_row_title"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_below="@id/news_row_category"
+              android:layout_toRightOf="@id/news_row_image"
+              android:layout_toLeftOf="@id/news_row_indicator"
+              android:textSize="13sp"
+              android:textColor="@android:color/black"
+              android:text="title"/>
+
+    <TextView android:id="@+id/news_row_date"
+              android:layout_width="fill_parent" android:layout_height="wrap_content"
+              android:layout_below="@id/news_row_title"
+              android:layout_toRightOf="@id/news_row_image"
+              android:layout_toLeftOf="@id/news_row_indicator"
+              android:textSize="10sp"
+              android:textColor="#808080"
+              android:text="date"/>
+
+    <!--<TextView android:id="@+id/news_row_content"-->
+    <!--android:layout_width="fill_parent" android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/news_row_date"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_toRightOf="@id/news_row_image"-->
+    <!--android:layout_toLeftOf="@id/news_row_indicator"-->
+    <!--android:maxLines="2"-->
+    <!--android:ellipsize="end"-->
+    <!--android:textSize="12sp"-->
+    <!--android:textColor="@android:color/black"-->
+    <!--android:text="content"/>-->
+
+</RelativeLayout>
