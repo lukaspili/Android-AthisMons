@@ -11,6 +11,7 @@ public class AppConstants {
 
     public static final String PREF_NEWS_MD5_KEY = "news_md5";
     public static final String PREF_AGENDA_MD5_KEY = "agenda_md5";
+    public static final String PREF_DIRECTORY_MD5_KEY = "directory_md5";
 
     public static final boolean DEBUG = true;
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ahtis Mons</string>
+    <string name="app_name">Athis Mons</string>
 
     <string name="tab_news">Actualités</string>
     <string name="tab_agenda">Agenda</string>
@@ -14,4 +14,10 @@
 
     <string name="agenda_fragment_refreshing">Rechargement de l\'agenda...</string>
     <string name="agenda_fragment_loading_internet_failure">Impossible de charger l\'agenda, veuillez vérifier votre connexion.</string>
+
+    <string name="directory_fragment_refreshing">Rechargement de l\'annuaire...</string>
+    <string name="directory_fragment_loading_internet_failure">Impossible de charger l\'annuaire, veuillez vérifier votre connexion.</string>
+
+    <string name="directory_detail_activity_cards_empty">Aucune fiche n\'a été trouvée pour cet annuaire.</string>
+
 </resources>

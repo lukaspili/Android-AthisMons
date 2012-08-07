@@ -6,6 +6,7 @@ import com.siu.android.andutils.activity.tracker.TrackedSherlockFragmentActivity
 import com.siu.android.athismons.R;
 import com.siu.android.athismons.actionbar.TabListener;
 import com.siu.android.athismons.fragment.AgendaFragment;
+import com.siu.android.athismons.fragment.DirectoryFragment;
 import com.siu.android.athismons.fragment.NewsFragment;
 
 /**
@@ -44,7 +45,7 @@ public class TabsActivity extends TrackedSherlockFragmentActivity {
 
         tab = actionBar.newTab()
                 .setText(R.string.tab_directory)
-                .setTabListener(new TabListener<NewsFragment>(this, "Directory", NewsFragment.class));
+                .setTabListener(new TabListener<DirectoryFragment>(this, "Directory", DirectoryFragment.class));
         actionBar.addTab(tab);
 
         if (savedInstanceState != null) {

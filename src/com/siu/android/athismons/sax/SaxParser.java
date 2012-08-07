@@ -2,6 +2,7 @@ package com.siu.android.athismons.sax;
 
 import android.util.Log;
 import com.siu.android.athismons.dao.model.Agenda;
+import com.siu.android.athismons.dao.model.Directory;
 import com.siu.android.athismons.dao.model.News;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
@@ -23,6 +24,10 @@ public class SaxParser {
 
     public List<Agenda> parseAgenda(String content) {
         return parse(new AgendaHandler(), content);
+    }
+
+    public List<Directory> parseDirectory(String content) {
+        return parse(new DirectoryHandler(), content);
     }
 
     private <T extends AbstractHandler> List parse(T handler, String content) {
