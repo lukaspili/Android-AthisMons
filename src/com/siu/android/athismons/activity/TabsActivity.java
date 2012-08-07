@@ -5,6 +5,7 @@ import com.actionbarsherlock.app.ActionBar;
 import com.siu.android.andutils.activity.tracker.TrackedSherlockFragmentActivity;
 import com.siu.android.athismons.R;
 import com.siu.android.athismons.actionbar.TabListener;
+import com.siu.android.athismons.fragment.AgendaFragment;
 import com.siu.android.athismons.fragment.NewsFragment;
 
 /**
@@ -28,7 +29,7 @@ public class TabsActivity extends TrackedSherlockFragmentActivity {
 
         tab = actionBar.newTab()
                 .setText(R.string.tab_agenda)
-                .setTabListener(new TabListener<NewsFragment>(this, "Agenda", NewsFragment.class));
+                .setTabListener(new TabListener<AgendaFragment>(this, "Agenda", AgendaFragment.class));
         actionBar.addTab(tab);
 
         tab = actionBar.newTab()

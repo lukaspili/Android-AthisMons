@@ -2,7 +2,6 @@ package com.siu.android.athismons.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +13,10 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.siu.android.athismons.R;
-import com.siu.android.athismons.activity.NewsDetailActivity;
-import com.siu.android.athismons.adapter.NewsAdapter;
-import com.siu.android.athismons.dao.model.News;
-import com.siu.android.athismons.task.NewsLoadTask;
+import com.siu.android.athismons.activity.AgendaDetailActivity;
+import com.siu.android.athismons.adapter.AgendaAdapter;
+import com.siu.android.athismons.dao.model.Agenda;
+import com.siu.android.athismons.task.AgendaLoadTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,14 +24,14 @@ import java.util.List;
 /**
  * @author Lukasz Piliszczuk <lukasz.pili AT gmail.com>
  */
-public class NewsFragment extends SherlockFragment {
+public class AgendaFragment extends SherlockFragment {
 
     private ListView listView;
-    private NewsAdapter adapter;
+    private AgendaAdapter adapter;
 
-    private NewsLoadTask newsLoadTask;
+    private AgendaLoadTask loadTask;
 
-    private List<News> newses = new ArrayList<News>();
+    private List<Agenda> agendas = new ArrayList<Agenda>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,7 +42,7 @@ public class NewsFragment extends SherlockFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.news_fragment, container, false);
+        View view = inflater.inflate(R.layout.agenda_fragment, container, false);
         listView = (ListView) view.findViewById(R.id.list);
         return view;
     }
@@ -52,24 +51,24 @@ public class NewsFragment extends SherlockFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        adapter = new NewsAdapter(getActivity(), newses);
+        adapter = new AgendaAdapter(getActivity(), agendas);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
-                intent.putExtra(NewsDetailActivity.EXTRA, adapter.getItem(i));
+                Intent intent = new Intent(getActivity(), AgendaDetailActivity.class);
+                intent.putExtra(AgendaDetailActivity.EXTRA, adapter.getItem(i));
                 startActivity(intent);
             }
         });
 
         // task is already running
-        if (null != newsLoadTask) {
+        if (null != loadTask) {
             getSherlockActivity().setSupportProgressBarIndeterminateVisibility(true);
         }
         // run task only if list is empty and not previously loaded
-        else if (newses.isEmpty()) {
-            startNewsLoadTask();
+        else if (agendas.isEmpty()) {
+            startLoadTask();
         }
     }
 
@@ -82,49 +81,49 @@ public class NewsFragment extends SherlockFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_refresh) {
-            Toast.makeText(getActivity(), R.string.news_fragment_refreshing, Toast.LENGTH_SHORT).show();
-            startNewsLoadTask();
+            Toast.makeText(getActivity(), R.string.agenda_fragment_refreshing, Toast.LENGTH_SHORT).show();
+            startLoadTask();
             return true;
         }
 
         return false;
     }
 
-    private void startNewsLoadTask() {
-        if (null != newsLoadTask) {
-            newsLoadTask.cancel(true);
-            newsLoadTask = null;
+    private void startLoadTask() {
+        if (null != loadTask) {
+            loadTask.cancel(true);
+            loadTask = null;
         }
 
         getSherlockActivity().setSupportProgressBarIndeterminateVisibility(true);
-        newsLoadTask = new NewsLoadTask(this);
-        newsLoadTask.execute();
+        loadTask = new AgendaLoadTask(this);
+        loadTask.execute();
     }
 
-    public void onNewsLoadTaskProgress(List<News> loadedNewses) {
-        if (null == loadedNewses || loadedNewses.isEmpty()) {
+    public void onLoadTaskProgress(List<Agenda> loadedAgendas) {
+        if (null == loadedAgendas || loadedAgendas.isEmpty()) {
             return;
         }
 
-        newses.clear();
-        newses.addAll(loadedNewses);
+        agendas.clear();
+        agendas.addAll(loadedAgendas);
         adapter.notifyDataSetChanged();
     }
 
-    public void onNewsLoadTaskFinished(List<News> loadedNewses) {
-        newsLoadTask = null;
+    public void onLoadTaskFinished(List<Agenda> loadedAgendas) {
+        loadTask = null;
         getSherlockActivity().setSupportProgressBarIndeterminateVisibility(false);
 
-        if (null == loadedNewses) {
-            // loaded newses are null and nothing came from progress
-            if (newses.isEmpty()) {
-                Toast.makeText(getActivity(), R.string.news_fragment_loading_internet_failure, Toast.LENGTH_LONG).show();
+        if (null == loadedAgendas) {
+            // loaded elements are null and nothing came from progress
+            if (agendas.isEmpty()) {
+                Toast.makeText(getActivity(), R.string.agenda_fragment_loading_internet_failure, Toast.LENGTH_LONG).show();
             }
             return;
         }
 
-        newses.clear();
-        newses.addAll(loadedNewses);
+        agendas.clear();
+        agendas.addAll(loadedAgendas);
         adapter.notifyDataSetChanged();
     }
 }

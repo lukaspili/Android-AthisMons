@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent" android:layout_height="wrap_content"
+                android:paddingLeft="5dip" android:paddingTop="5dip" android:paddingBottom="5dip">
+
+    <ImageView android:id="@+id/agenda_row_image"
+               android:layout_width="75dip" android:layout_height="74dip"
+               android:layout_alignParentTop="true"
+               android:layout_marginRight="5dip"
+               android:scaleType="fitCenter"/>
+
+    <ImageView android:id="@+id/agenda_row_indicator"
+               android:layout_width="wrap_content" android:layout_height="wrap_content"
+               android:layout_alignParentRight="true"
+               android:layout_centerVertical="true"
+               android:src="@drawable/ic_row_right"/>
+
+    <TextView android:id="@+id/agenda_row_category"
+              android:layout_width="fill_parent" android:layout_height="wrap_content"
+              android:layout_alignTop="@id/agenda_row_image"
+              android:layout_toRightOf="@id/agenda_row_image"
+              android:layout_toLeftOf="@id/agenda_row_indicator"
+              android:textSize="13sp"
+              android:textColor="@color/red"
+              android:text="content"/>
+
+    <TextView android:id="@+id/agenda_row_title"
+              android:layout_width="fill_parent" android:layout_height="wrap_content"
+              android:layout_below="@id/agenda_row_category"
+              android:layout_toRightOf="@id/agenda_row_image"
+              android:layout_toLeftOf="@id/agenda_row_indicator"
+              android:textSize="13sp"
+              android:textColor="@android:color/black"
+              android:text="title"/>
+</RelativeLayout>

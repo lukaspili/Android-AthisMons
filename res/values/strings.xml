@@ -10,5 +10,8 @@
     <string name="menu_refresh">Rafraichir</string>
 
     <string name="news_fragment_refreshing">Rechargement des actualités...</string>
-    <string name="news_fragment_loading_internet_failure">Impossible de charger les actualités à partir d\'internet, veuillez vérifier votre connexion.</string>
+    <string name="news_fragment_loading_internet_failure">Impossible de charger les actualités, veuillez vérifier votre connexion.</string>
+
+    <string name="agenda_fragment_refreshing">Rechargement de l\'agenda...</string>
+    <string name="agenda_fragment_loading_internet_failure">Impossible de charger l\'agenda, veuillez vérifier votre connexion.</string>
 </resources>

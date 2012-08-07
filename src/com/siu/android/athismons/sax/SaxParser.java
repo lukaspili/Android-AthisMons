@@ -1,16 +1,13 @@
 package com.siu.android.athismons.sax;
 
 import android.util.Log;
+import com.siu.android.athismons.dao.model.Agenda;
 import com.siu.android.athismons.dao.model.News;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
-import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.StringReader;
-import java.nio.charset.Charset;
 import java.util.List;
 
 /**
@@ -20,18 +17,21 @@ public class SaxParser {
 
     private SAXParserFactory parserFactory = SAXParserFactory.newInstance();
 
-    public List<News> parseNews(InputStream inputStream) {
+    public List<News> parseNews(String content) {
+        return parse(new NewsHandler(), content);
+    }
 
-        NewsHandler handler = new NewsHandler();
+    public List<Agenda> parseAgenda(String content) {
+        return parse(new AgendaHandler(), content);
+    }
 
+    private <T extends AbstractHandler> List parse(T handler, String content) {
         try {
             XMLReader xmlReader = parserFactory.newSAXParser().getXMLReader();
             xmlReader.setContentHandler(handler);
-            InputSource inputSource = new InputSource();
-            inputSource.setCharacterStream(new InputStreamReader(inputStream, Charset.forName("ISO-8859-1")));
-            xmlReader.parse(inputSource);
+            xmlReader.parse(new InputSource(new StringReader(content)));
         } catch (Exception e) {
-            Log.e(getClass().getName(), "Error parsing news", e);
+            Log.e(getClass().getName(), "Error in parsing", e);
             return null;
         }
 

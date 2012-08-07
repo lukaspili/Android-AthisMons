@@ -31,7 +31,7 @@ public class TabListener<T extends SherlockFragment> implements ActionBar.TabLis
         // Check to see if we already have a fragment for this tab, probably
         // from a previously saved state.  If so, deactivate it, because our
         // initial state is that a tab isn't shown.
-//        fragment = this.activity.getSupportFragmentManager().findFragmentByTag(tag);
+        fragment = activity.getSupportFragmentManager().findFragmentByTag(tag);
 
         //Avec ce code on charge 2 fois le dernier tab et on perd des trucs (sur le impactfragment)
         /*

@@ -1,18 +1,18 @@
 package com.siu.android.athismons.sax;
 
-import com.siu.android.athismons.dao.model.News;
+import com.siu.android.athismons.dao.model.Agenda;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 /**
  * @author Lukasz Piliszczuk <lukasz.pili AT gmail.com>
  */
-public class NewsHandler extends AbstractHandler<News> {
+public class AgendaHandler extends AbstractHandler<Agenda> {
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         if (localName.equalsIgnoreCase("item")) {
-            element = new News();
+            element = new Agenda();
         } else if (localName.equalsIgnoreCase("enclosure")) {
             element.setImage(attributes.getValue("url"));
         }
@@ -46,9 +46,6 @@ public class NewsHandler extends AbstractHandler<News> {
             } else {
                 element.setTitle(value);
             }
-
-        } else if (localName.equalsIgnoreCase("pubDate")) {
-            element.setPubDate(value);
 
         } else if (localName.equalsIgnoreCase("description")) {
             element.setDescription(value);
