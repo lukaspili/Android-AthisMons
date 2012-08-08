@@ -20,4 +20,36 @@
 
     <string name="directory_detail_activity_cards_empty">Aucune fiche n\'a été trouvée pour cet annuaire.</string>
 
+    <string name="card_detail_email">Mél : %1$s</string>
+    <string name="card_detail_website">Site : %1$s</string>
+    <string name="card_detail_phone_label">Téléphones :</string>
+    <string name="card_detail_contact_label">Contact :</string>
+    <string name="card_detail_locate">Localiser</string>
+
+    <string name="error_no_maps">Impossible de localiser l\'adresse, vous n\'avez pas de plans installé sur le téléphone</string>
+
+    <string name="incident_rules_1">Ce formulaire vous permet de déclarer des incidents d\'ordre technique localisés sur le territoire de la ville d\'Athis-Mons.
+        Afin de faciliter l\'intervention des services,
+        <b>merci d\'être le plus précis possible sur les renseignements que vous founissez (localisation et description).</b>
+    </string>
+    <string name="incident_rules_2">Les déclarations anonymes ou sans description ne seront pas traitées.</string>
+    <string name="incident_type">Nature de l\'incident</string>
+    <string name="incident_add_picture">Ajouter une photo</string>
+    <string name="incident_address_label">Adresse</string>
+    <string name="incident_locate_myself">Localisez-moi</string>
+    <string name="incident_description_label">Description</string>
+    <string name="incident_lastname_label">Nom</string>
+    <string name="incident_firstname_label">Prénom</string>
+    <string name="incident_email_label">Email</string>
+    <string name="incident_send">Envoyer la déclaration</string>
+
+    <string name="incident_types_title">Nature de l\incident</string>
+    <string-array name="incident_types">
+        <item>Voirie urbaine</item>
+        <item>Eclairage</item>
+        <item>Feux tricolores</item>
+        <item>Graffitis</item>
+        <item>Collecte de déchêt</item>
+    </string-array>
+
 </resources>

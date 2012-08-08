@@ -1,13 +1,20 @@
 package com.siu.android.athismons.sax;
 
+import android.util.Log;
+import com.siu.android.andutils.util.DateUtils;
 import com.siu.android.athismons.dao.model.News;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 /**
  * @author Lukasz Piliszczuk <lukasz.pili AT gmail.com>
  */
 public class NewsHandler extends AbstractHandler<News> {
+
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMMM yyyy HH:mm:ss Z", Locale.ENGLISH);
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
@@ -48,7 +55,12 @@ public class NewsHandler extends AbstractHandler<News> {
             }
 
         } else if (localName.equalsIgnoreCase("pubDate")) {
-            element.setPubDate(value);
+            try {
+                element.setPubDate(DateUtils.formatAsFull(dateFormat.parse(value)));
+            } catch (Exception e) {
+                element.setPubDate(value);
+                Log.e(getClass().getName(), "Invalid date format : " + value, e);
+            }
 
         } else if (localName.equalsIgnoreCase("description")) {
             element.setDescription(value);

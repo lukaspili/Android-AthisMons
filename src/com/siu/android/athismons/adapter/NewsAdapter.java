@@ -1,7 +1,10 @@
 package com.siu.android.athismons.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.View;
+import android.widget.ImageView;
+import com.koushikdutta.urlimageviewhelper.UrlImageViewCallback;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.siu.android.andutils.adapter.SimpleAdapter;
 import com.siu.android.athismons.R;
@@ -20,7 +23,7 @@ public class NewsAdapter extends SimpleAdapter<News, NewsViewHolder> {
     }
 
     @Override
-    protected void configure(NewsViewHolder viewHolder, News news) {
+    protected void configure(final NewsViewHolder viewHolder, News news) {
         if (StringUtils.isNotEmpty(news.getCategory())) {
             viewHolder.category.setText(news.getCategory());
         } else {

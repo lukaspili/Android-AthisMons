@@ -24,5 +24,6 @@
         <activity android:name=".activity.NewsDetailActivity"/>
         <activity android:name=".activity.AgendaDetailActivity"/>
         <activity android:name=".activity.DirectoryDetailActivity"/>
+        <activity android:name=".activity.CardDetailActivity"/>
     </application>
 </manifest>

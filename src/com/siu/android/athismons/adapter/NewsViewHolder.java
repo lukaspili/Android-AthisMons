@@ -1,6 +1,7 @@
 package com.siu.android.athismons.adapter;
 
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.siu.android.andutils.adapter.SimpleViewHolder;
 import com.siu.android.athismons.R;
