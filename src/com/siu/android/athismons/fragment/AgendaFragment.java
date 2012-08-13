@@ -8,11 +8,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
-import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.siu.android.andutils.http.HttpManager;
 import com.siu.android.athismons.R;
+import com.siu.android.athismons.actionbar.TabSherlockFragment;
 import com.siu.android.athismons.activity.AgendaDetailActivity;
 import com.siu.android.athismons.adapter.AgendaAdapter;
 import com.siu.android.athismons.dao.model.Agenda;
@@ -24,7 +25,7 @@ import java.util.List;
 /**
  * @author Lukasz Piliszczuk <lukasz.pili AT gmail.com>
  */
-public class AgendaFragment extends SherlockFragment {
+public class AgendaFragment extends TabSherlockFragment {
 
     private ListView listView;
     private AgendaAdapter adapter;
@@ -89,11 +90,13 @@ public class AgendaFragment extends SherlockFragment {
         return false;
     }
 
+    @Override
+    public void tabUnselected() {
+        stopLoadTaskIfRunning();
+    }
+
     private void startLoadTask() {
-        if (null != loadTask) {
-            loadTask.cancel(true);
-            loadTask = null;
-        }
+        stopLoadTaskIfRunning();
 
         getSherlockActivity().setSupportProgressBarIndeterminateVisibility(true);
         loadTask = new AgendaLoadTask(this);
@@ -110,9 +113,19 @@ public class AgendaFragment extends SherlockFragment {
         adapter.notifyDataSetChanged();
     }
 
-    public void onLoadTaskFinished(List<Agenda> loadedAgendas) {
+    protected void stopLoadTaskIfRunning() {
+        if (null == loadTask) {
+            return;
+        }
+
+        HttpManager.getInstance().closeActivesRequests();
+        loadTask.cancel(true);
         loadTask = null;
         getSherlockActivity().setSupportProgressBarIndeterminateVisibility(false);
+    }
+
+    public void onLoadTaskFinished(List<Agenda> loadedAgendas) {
+        stopLoadTaskIfRunning();
 
         if (null == loadedAgendas) {
             // loaded elements are null and nothing came from progress

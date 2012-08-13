@@ -1,6 +1,7 @@
 package com.siu.android.athismons.fragment;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,7 +14,9 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.siu.android.andutils.http.HttpManager;
 import com.siu.android.athismons.R;
+import com.siu.android.athismons.actionbar.TabSherlockFragment;
 import com.siu.android.athismons.activity.NewsDetailActivity;
 import com.siu.android.athismons.adapter.NewsAdapter;
 import com.siu.android.athismons.dao.model.News;
@@ -25,7 +28,7 @@ import java.util.List;
 /**
  * @author Lukasz Piliszczuk <lukasz.pili AT gmail.com>
  */
-public class NewsFragment extends SherlockFragment {
+public class NewsFragment extends TabSherlockFragment {
 
     private ListView listView;
     private NewsAdapter adapter;
@@ -62,9 +65,14 @@ public class NewsFragment extends SherlockFragment {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
 
         // task is already running
-        if (null != newsLoadTask) {
+        if (null != newsLoadTask && newsLoadTask.getStatus() != AsyncTask.Status.FINISHED) {
             getSherlockActivity().setSupportProgressBarIndeterminateVisibility(true);
         }
         // run task only if list is empty and not previously loaded
@@ -90,15 +98,28 @@ public class NewsFragment extends SherlockFragment {
         return false;
     }
 
+    @Override
+    public void tabUnselected() {
+        stopNewsLoadTaskIfRunning();
+    }
+
     private void startNewsLoadTask() {
-        if (null != newsLoadTask) {
-            newsLoadTask.cancel(true);
-            newsLoadTask = null;
-        }
+        stopNewsLoadTaskIfRunning();
 
         getSherlockActivity().setSupportProgressBarIndeterminateVisibility(true);
         newsLoadTask = new NewsLoadTask(this);
         newsLoadTask.execute();
+    }
+
+    protected void stopNewsLoadTaskIfRunning() {
+        if (null == newsLoadTask) {
+            return;
+        }
+
+        newsLoadTask.cancel(true);
+        newsLoadTask = null;
+        HttpManager.getInstance().closeActivesRequests();
+        getSherlockActivity().setSupportProgressBarIndeterminateVisibility(false);
     }
 
     public void onNewsLoadTaskProgress(List<News> loadedNewses) {
@@ -112,8 +133,7 @@ public class NewsFragment extends SherlockFragment {
     }
 
     public void onNewsLoadTaskFinished(List<News> loadedNewses) {
-        newsLoadTask = null;
-        getSherlockActivity().setSupportProgressBarIndeterminateVisibility(false);
+        stopNewsLoadTaskIfRunning();
 
         if (null == loadedNewses) {
             // loaded newses are null and nothing came from progress

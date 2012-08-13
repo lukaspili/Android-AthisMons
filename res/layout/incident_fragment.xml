@@ -20,75 +20,87 @@
                       android:textStyle="bold"
                       android:text="@string/incident_rules_2"/>
 
-            <!-- incident type button -->
-            <Button android:id="@+id/incident_type_button"
-                    android:layout_width="fill_parent" android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dip" android:layout_marginRight="20dip"
-                    android:layout_marginBottom="10dip"
-                    android:text="@string/incident_type"/>
+            <Spinner android:id="@+id/incident_types_spinner"
+                     android:layout_width="fill_parent" android:layout_height="wrap_content"
+                     android:prompt="@string/incident_type"/>
+
+            <!-- incident type spinner -->
+            <!--<Button android:id="@+id/incident_type_button"-->
+            <!--android:layout_width="fill_parent" android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="20dip" android:layout_marginRight="20dip"-->
+            <!--android:layout_marginBottom="10dip"-->
+            <!--android:text="@string/incident_type"/>-->
+
+
+            <!-- description -->
+            <!--<TextView android:id="@+id/incident_description_label"-->
+            <!--android:layout_width="fill_parent" android:layout_height="wrap_content"-->
+            <!--android:textStyle="bold"-->
+            <!--android:text="@string/incident_description_label"/>-->
+
+            <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+
+                <!-- locate button -->
+                <ImageButton android:id="@+id/incident_locate_button"
+                             android:layout_width="wrap_content" android:layout_height="wrap_content"
+                             android:layout_alignParentRight="true"
+                             android:src="@drawable/ic_locate"/>
+
+                <EditText android:id="@+id/incident_address"
+                          android:layout_width="fill_parent" android:layout_height="wrap_content"
+                          android:layout_toLeftOf="@id/incident_locate_button"
+                          android:layout_alignBottom="@id/incident_locate_button"
+                          android:hint="@string/incident_address_label"/>
+            </RelativeLayout>
+
+            <EditText android:id="@+id/incident_description"
+                      android:layout_width="fill_parent" android:layout_height="wrap_content"
+                      android:hint="@string/incident_description_label"/>
+
+            <!-- address -->
+            <!--<TextView android:id="@+id/incident_address_label"-->
+            <!--android:layout_width="fill_parent" android:layout_height="wrap_content"-->
+            <!--android:textStyle="bold"-->
+            <!--android:text="@string/incident_address_label"/>-->
+
+
+            <!-- last name -->
+            <!--<TextView android:id="@+id/incident_lastname_label"-->
+            <!--android:layout_width="fill_parent" android:layout_height="wrap_content"-->
+            <!--android:textStyle="bold"-->
+            <!--android:text="@string/incident_lastname_label"/>-->
+
+            <EditText android:id="@+id/incident_lastname"
+                      android:layout_width="fill_parent" android:layout_height="wrap_content"
+                      android:hint="@string/incident_lastname_label"/>
+
+            <!-- first name -->
+            <!--<TextView android:id="@+id/incident_firstname_label"-->
+            <!--android:layout_width="fill_parent" android:layout_height="wrap_content"-->
+            <!--android:textStyle="bold"-->
+            <!--android:text="@string/incident_firstname_label"/>-->
+
+            <EditText android:id="@+id/incident_firstname"
+                      android:layout_width="fill_parent" android:layout_height="wrap_content"
+                      android:hint="@string/incident_firstname_label"/>
+
+            <!-- email -->
+            <!--<TextView android:id="@+id/incident_email_label"-->
+            <!--android:layout_width="fill_parent" android:layout_height="wrap_content"-->
+            <!--android:textStyle="bold"-->
+            <!--android:text="@string/incident_email_label"/>-->
+
+            <EditText android:id="@+id/incident_email"
+                      android:layout_width="fill_parent" android:layout_height="wrap_content"
+                      android:layout_marginBottom="15dip"
+                      android:hint="@string/incident_email_label"/>
 
             <!-- picture button -->
             <Button android:id="@+id/incident_add_picture_button"
                     android:layout_width="fill_parent" android:layout_height="wrap_content"
                     android:layout_marginLeft="20dip" android:layout_marginRight="20dip"
-                    android:layout_marginBottom="15dip"
+                    android:layout_marginBottom="5dip"
                     android:text="@string/incident_add_picture"/>
-
-            <!-- description -->
-            <TextView android:id="@+id/incident_description_label"
-                      android:layout_width="fill_parent" android:layout_height="wrap_content"
-                      android:textStyle="bold"
-                      android:text="@string/incident_description_label"/>
-
-            <EditText android:id="@+id/incident_description"
-                      android:layout_width="fill_parent" android:layout_height="wrap_content"
-                      android:layout_marginBottom="15dip"/>
-
-            <!-- address -->
-            <TextView android:id="@+id/incident_address_label"
-                      android:layout_width="fill_parent" android:layout_height="wrap_content"
-                      android:textStyle="bold"
-                      android:text="@string/incident_address_label"/>
-
-            <EditText android:id="@+id/incident_address"
-                      android:layout_width="fill_parent" android:layout_height="wrap_content"/>
-
-            <!-- locate button -->
-            <Button android:id="@+id/incident_locate_button"
-                    android:layout_width="fill_parent" android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dip" android:layout_marginRight="20dip"
-                    android:layout_marginBottom="15dip"
-                    android:text="@string/incident_locate_myself"/>
-
-            <!-- last name -->
-            <TextView android:id="@+id/incident_lastname_label"
-                      android:layout_width="fill_parent" android:layout_height="wrap_content"
-                      android:textStyle="bold"
-                      android:text="@string/incident_lastname_label"/>
-
-            <EditText android:id="@+id/incident_lastname"
-                      android:layout_width="fill_parent" android:layout_height="wrap_content"
-                      android:layout_marginBottom="15dip"/>
-
-            <!-- first name -->
-            <TextView android:id="@+id/incident_firstname_label"
-                      android:layout_width="fill_parent" android:layout_height="wrap_content"
-                      android:textStyle="bold"
-                      android:text="@string/incident_firstname_label"/>
-
-            <EditText android:id="@+id/incident_firstname"
-                      android:layout_width="fill_parent" android:layout_height="wrap_content"
-                      android:layout_marginBottom="15dip"/>
-
-            <!-- email -->
-            <TextView android:id="@+id/incident_email_label"
-                      android:layout_width="fill_parent" android:layout_height="wrap_content"
-                      android:textStyle="bold"
-                      android:text="@string/incident_email_label"/>
-
-            <EditText android:id="@+id/incident_email"
-                      android:layout_width="fill_parent" android:layout_height="wrap_content"
-                      android:layout_marginBottom="15dip"/>
 
             <!-- send button -->
             <Button android:id="@+id/incident_send_button"

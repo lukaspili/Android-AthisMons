@@ -1,5 +1,7 @@
 package com.siu.android.athismons.model;
 
+import android.graphics.Bitmap;
+
 /**
  * @author Lukasz Piliszczuk <lukasz.pili AT gmail.com>
  */
@@ -11,6 +13,7 @@ public class Incident {
     private String firstname;
     private String lastname;
     private String email;
+    private Bitmap bitmap;
 
     public String getType() {
         return type;
@@ -58,5 +61,13 @@ public class Incident {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
     }
 }

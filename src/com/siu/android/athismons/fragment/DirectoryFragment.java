@@ -12,7 +12,9 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.siu.android.andutils.http.HttpManager;
 import com.siu.android.athismons.R;
+import com.siu.android.athismons.actionbar.TabSherlockFragment;
 import com.siu.android.athismons.activity.DirectoryDetailActivity;
 import com.siu.android.athismons.adapter.DirectoryAdapter;
 import com.siu.android.athismons.dao.model.Directory;
@@ -24,7 +26,7 @@ import java.util.List;
 /**
  * @author Lukasz Piliszczuk <lukasz.pili AT gmail.com>
  */
-public class DirectoryFragment extends SherlockFragment {
+public class DirectoryFragment extends TabSherlockFragment {
 
     private ListView listView;
     private DirectoryAdapter adapter;
@@ -89,15 +91,28 @@ public class DirectoryFragment extends SherlockFragment {
         return false;
     }
 
+    @Override
+    public void tabUnselected() {
+        stopLoadTaskIfRunning();
+    }
+
     private void startLoadTask() {
-        if (null != loadTask) {
-            loadTask.cancel(true);
-            loadTask = null;
-        }
+        stopLoadTaskIfRunning();
 
         getSherlockActivity().setSupportProgressBarIndeterminateVisibility(true);
         loadTask = new DirectoryLoadTask(this);
         loadTask.execute();
+    }
+
+    private void stopLoadTaskIfRunning() {
+        if (null == loadTask) {
+            return;
+        }
+
+        HttpManager.getInstance().closeActivesRequests();
+        loadTask.cancel(true);
+        loadTask = null;
+        getSherlockActivity().setSupportProgressBarIndeterminateVisibility(false);
     }
 
     public void onLoadTaskProgress(List<Directory> loadedDirectorys) {
@@ -111,8 +126,7 @@ public class DirectoryFragment extends SherlockFragment {
     }
 
     public void onLoadTaskFinished(List<Directory> loadedDirectories) {
-        loadTask = null;
-        getSherlockActivity().setSupportProgressBarIndeterminateVisibility(false);
+        stopLoadTaskIfRunning();
 
         if (null == loadedDirectories) {
             // loaded elements are null and nothing came from progress

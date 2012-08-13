@@ -42,9 +42,19 @@
     <string name="incident_firstname_label">Prénom</string>
     <string name="incident_email_label">Email</string>
     <string name="incident_send">Envoyer la déclaration</string>
+    <string name="incident_address_location_failed">Impossible de déterminer votre adresse à partir de votre localisation.</string>
+    <string name="incident_submit_success">L\'incident a été envoyé avec succès à la mairie.</string>
+    <string name="incident_submit_failed">Impossible d\'envoyer l\'incident à la mairie.</string>
+
+    <string name="incident_location_progress_dialog_title">Localisation en cours</string>
+    <string name="incident_location_progress_dialog_message">Veuillez patienter pendant que l\'application essaie de déterminer l\'adresse à partir de votre position.</string>
+
+    <string name="incident_submit_progress_dialog_title">Envoi en cours</string>
+    <string name="incident_submit_progress_dialog_message">Veuillez patienter pendant l\'envoi de l\'incident.</string>
 
     <string name="incident_types_title">Nature de l\incident</string>
     <string-array name="incident_types">
+        <item>Nature de l\'accident</item>
         <item>Voirie urbaine</item>
         <item>Eclairage</item>
         <item>Feux tricolores</item>
