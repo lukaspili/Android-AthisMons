@@ -1,20 +1,18 @@
 package com.siu.android.athismons.sax;
 
-import com.siu.android.athismons.dao.model.Agenda;
+import com.siu.android.athismons.dao.model.Menu;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 /**
  * @author Lukasz Piliszczuk <lukasz.pili AT gmail.com>
  */
-public class AgendaHandler extends AbstractHandler<Agenda> {
+public class MenuHandler extends AbstractHandler<Menu> {
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         if (localName.equalsIgnoreCase("item")) {
-            element = new Agenda();
-        } else if (localName.equalsIgnoreCase("enclosure")) {
-            element.setImage(attributes.getValue("url"));
+            element = new Menu();
         }
 
         value = null; // reset value each time
@@ -28,16 +26,13 @@ public class AgendaHandler extends AbstractHandler<Agenda> {
         }
 
         if (localName.equalsIgnoreCase("title")) {
-            String[] s = value.split("-", 2);
-            if (s.length == 2) {
-                element.setCategory(s[0].trim());
-                element.setTitle(s[1].trim());
-            } else {
-                element.setTitle(value);
-            }
+            element.setTitle(value);
 
         } else if (localName.equalsIgnoreCase("description")) {
             element.setDescription(value);
+
+        } else if (localName.equalsIgnoreCase("link")) {
+            element.setLink(value);
 
         } else if (localName.equalsIgnoreCase("item")) {
             list.add(element);

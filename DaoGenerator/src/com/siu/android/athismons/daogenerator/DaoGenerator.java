@@ -58,8 +58,12 @@ public class DaoGenerator {
         Property directoryId = card.addLongProperty("directoryId").notNull().getProperty();
         ToMany customerToOrders = directory.addToMany(card, directoryId);
 
-//        Property directoryIdProperty = card.addLongProperty("directoryId").getProperty();
-//        card.addToOne(directory, directoryIdProperty);
+        Entity menu = schema.addEntity("Menu");
+        menu.implementsSerializable();
+        menu.addIdProperty();
+        menu.addStringProperty("title");
+        menu.addStringProperty("description");
+        menu.addStringProperty("link");
 
         new de.greenrobot.daogenerator.DaoGenerator().generateAll(schema, "./src-gen");
     }

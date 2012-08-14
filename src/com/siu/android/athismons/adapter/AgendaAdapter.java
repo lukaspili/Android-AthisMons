@@ -23,12 +23,14 @@ public class AgendaAdapter extends SimpleAdapter<Agenda, AgendaViewHolder> {
     @Override
     protected void configure(AgendaViewHolder viewHolder, Agenda agenda) {
         if (StringUtils.isNotEmpty(agenda.getCategory())) {
+            viewHolder.category.setVisibility(View.VISIBLE);
             viewHolder.category.setText(agenda.getCategory());
         } else {
             viewHolder.category.setVisibility(View.GONE);
         }
 
         if (StringUtils.isNotEmpty(agenda.getImage())) {
+            viewHolder.image.setVisibility(View.VISIBLE);
             UrlImageViewHelper.setUrlDrawable(viewHolder.image, agenda.getImage());
         } else {
             viewHolder.image.setVisibility(View.GONE);

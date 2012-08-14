@@ -18,6 +18,9 @@
     <string name="directory_fragment_refreshing">Rechargement de l\'annuaire...</string>
     <string name="directory_fragment_loading_internet_failure">Impossible de charger l\'annuaire, veuillez vérifier votre connexion.</string>
 
+    <string name="menu_fragment_refreshing">Rechargement des menus...</string>
+    <string name="menu_fragment_loading_internet_failure">Impossible de charger les menus, veuillez vérifier votre connexion.</string>
+
     <string name="directory_detail_activity_cards_empty">Aucune fiche n\'a été trouvée pour cet annuaire.</string>
 
     <string name="card_detail_email">Mél : %1$s</string>
@@ -35,6 +38,7 @@
     <string name="incident_rules_2">Les déclarations anonymes ou sans description ne seront pas traitées.</string>
     <string name="incident_type">Nature de l\'incident</string>
     <string name="incident_add_picture">Ajouter une photo</string>
+    <string name="incident_change_picture">Changer la photo</string>
     <string name="incident_address_label">Adresse</string>
     <string name="incident_locate_myself">Localisez-moi</string>
     <string name="incident_description_label">Description</string>

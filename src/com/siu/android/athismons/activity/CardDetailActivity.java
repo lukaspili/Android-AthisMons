@@ -52,7 +52,13 @@ public class CardDetailActivity extends TrackedSherlockActivity {
         locateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=37.423156,-122.084917 (" + card.getTitle() + ")"));
+                String location = new StringBuilder("geo:0,0?q=")
+                        .append(card.getLatitude())
+                        .append(",")
+                        .append(card.getLongitude())
+                        .toString();
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(location));
+
                 try {
                     startActivity(intent);
                 } catch (Exception e) {

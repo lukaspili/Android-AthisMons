@@ -27,7 +27,7 @@ public class AgendaDetailActivity extends TrackedSherlockActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.news_detail);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         agenda = (Agenda) getIntent().getExtras().get(EXTRA);
 

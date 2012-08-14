@@ -32,17 +32,6 @@ public class DirectoryHandler extends AbstractHandler<Directory> {
     }
 
     @Override
-    public void characters(char[] ch, int start, int length) throws SAXException {
-        String content = new String(ch, start, length).trim();
-
-        if (null != value) {
-            value += content;
-        } else {
-            value = content;
-        }
-    }
-
-    @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
         // in card tags
         if (inCard) {

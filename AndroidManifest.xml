@@ -25,5 +25,6 @@
         <activity android:name=".activity.AgendaDetailActivity"/>
         <activity android:name=".activity.DirectoryDetailActivity"/>
         <activity android:name=".activity.CardDetailActivity"/>
+        <activity android:name=".activity.MenuDetailActivity"/>
     </application>
 </manifest>

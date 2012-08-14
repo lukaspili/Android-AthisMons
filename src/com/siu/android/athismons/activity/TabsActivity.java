@@ -5,10 +5,7 @@ import com.actionbarsherlock.app.ActionBar;
 import com.siu.android.andutils.activity.tracker.TrackedSherlockFragmentActivity;
 import com.siu.android.athismons.R;
 import com.siu.android.athismons.actionbar.TabListener;
-import com.siu.android.athismons.fragment.AgendaFragment;
-import com.siu.android.athismons.fragment.DirectoryFragment;
-import com.siu.android.athismons.fragment.IncidentFragment;
-import com.siu.android.athismons.fragment.NewsFragment;
+import com.siu.android.athismons.fragment.*;
 
 /**
  * @author Lukasz Piliszczuk <lukasz.pili AT gmail.com>
@@ -41,7 +38,7 @@ public class TabsActivity extends TrackedSherlockFragmentActivity {
 
         tab = actionBar.newTab()
                 .setText(R.string.tab_menus)
-                .setTabListener(new TabListener<NewsFragment>(this, "Menus", NewsFragment.class));
+                .setTabListener(new TabListener<MenuFragment>(this, "Menus", MenuFragment.class));
         actionBar.addTab(tab);
 
         tab = actionBar.newTab()

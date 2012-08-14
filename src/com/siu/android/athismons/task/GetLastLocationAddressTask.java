@@ -83,10 +83,6 @@ public class GetLastLocationAddressTask extends AsyncTask<Void, Void, String> {
 
             StringBuilder builder = new StringBuilder();
 
-            if (null != address.getFeatureName()) {
-                builder.append(address.getFeatureName()).append(", ");
-            }
-
             for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
                 builder.append(address.getAddressLine(i));
                 if (i < address.getMaxAddressLineIndex()) {

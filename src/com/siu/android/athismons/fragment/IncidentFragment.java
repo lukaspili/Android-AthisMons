@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,7 @@ public class IncidentFragment extends TabSherlockFragment {
         addPictureButton = (Button) view.findViewById(R.id.incident_add_picture_button);
         locateButton = (ImageButton) view.findViewById(R.id.incident_locate_button);
         sendButton = (Button) view.findViewById(R.id.incident_send_button);
+        description = (TextView) view.findViewById(R.id.incident_description);
         address = (TextView) view.findViewById(R.id.incident_address);
         lastname = (TextView) view.findViewById(R.id.incident_lastname);
         firstname = (TextView) view.findViewById(R.id.incident_firstname);
@@ -65,6 +67,10 @@ public class IncidentFragment extends TabSherlockFragment {
 
         initSpinner();
         initButtons();
+
+        if (null != incident.getBitmap()) {
+            addPictureButton.setText(R.string.incident_change_picture);
+        }
     }
 
     @Override
@@ -115,29 +121,22 @@ public class IncidentFragment extends TabSherlockFragment {
         addPictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, 1);
+                startActivityForResult(new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE), 1);
             }
         });
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                incident.setDescription(description.getText().toString());
+                incident.setAddress(address.getText().toString());
+                incident.setEmail(email.getText().toString());
+                incident.setFirstname(firstname.getText().toString());
+                incident.setLastname(lastname.getText().toString());
+
                 startIncidentSubmitTask();
             }
         });
-    }
-
-    private void updateIncident() {
-//        if (null != incident.getType()) {
-//            incidentTypesSpinner.setSelection(incidentTypesAdapter.getPosition(incident.getType()));
-//        }
-//
-//        if (null != incident.getDescription()) {
-//            description.setText(incident.getType());
-//        }
-
-
     }
 
     private void startGetLastLocationAddress() {
@@ -161,7 +160,12 @@ public class IncidentFragment extends TabSherlockFragment {
     }
 
     public void onGetLastLocationAddressTaskFinished(String receivedAddress) {
-        incidentLocationProgressDialog.dismiss();
+        try {
+            incidentLocationProgressDialog.dismiss();
+        } catch (Exception e) {
+            Log.e(getClass().getName(), "Cannot dismiss IncidentLocationProgressDialog", e);
+        }
+
         getLastLocationAddressTask = null;
 
         if (null == receivedAddress) {
@@ -173,8 +177,12 @@ public class IncidentFragment extends TabSherlockFragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intentData) {
-        Bitmap bitmap = (Bitmap) intentData.getExtras().get("data");
-        incident.setBitmap(bitmap);
+        if (null == intentData.getExtras()) {
+            return;
+        }
+
+        incident.setBitmap((Bitmap) intentData.getExtras().get("data"));
+        addPictureButton.setText(R.string.incident_change_picture);
     }
 
     public void startIncidentSubmitTask() {
@@ -189,7 +197,12 @@ public class IncidentFragment extends TabSherlockFragment {
     }
 
     public void onIncidentSubmitTaskFinished(Boolean result) {
-        incidentSubmitProgressDialog.dismiss();
+        try {
+            incidentSubmitProgressDialog.dismiss();
+        } catch (Exception e) {
+            Log.e(getClass().getName(), "Cannot dismiss IncidentSubmitProgressDialog", e);
+        }
+
         incidentSubmitTask = null;
 
         if (result) {

@@ -25,12 +25,14 @@ public class NewsAdapter extends SimpleAdapter<News, NewsViewHolder> {
     @Override
     protected void configure(final NewsViewHolder viewHolder, News news) {
         if (StringUtils.isNotEmpty(news.getCategory())) {
+            viewHolder.category.setVisibility(View.VISIBLE);
             viewHolder.category.setText(news.getCategory());
         } else {
             viewHolder.category.setVisibility(View.GONE);
         }
 
         if (StringUtils.isNotEmpty(news.getImage())) {
+            viewHolder.image.setVisibility(View.VISIBLE);
             UrlImageViewHelper.setUrlDrawable(viewHolder.image, news.getImage());
         } else {
             viewHolder.image.setVisibility(View.GONE);
