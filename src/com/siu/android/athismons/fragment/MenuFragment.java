@@ -117,7 +117,6 @@ public class MenuFragment extends TabSherlockFragment {
             return;
         }
 
-        HttpManager.getInstance().closeActivesRequests();
         loadTask.cancel(true);
         loadTask = null;
         getSherlockActivity().setSupportProgressBarIndeterminateVisibility(false);

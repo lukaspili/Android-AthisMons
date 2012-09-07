@@ -4,10 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import com.actionbarsherlock.view.MenuItem;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.siu.android.andutils.activity.tracker.TrackedSherlockActivity;
@@ -24,7 +21,7 @@ public class CardDetailActivity extends TrackedSherlockActivity {
 
     private TextView title, building, street, cityPostalCode, addressComplement, contact, contactLabel, website, email, phoneLabel, phone1, phone2;
     private ImageView picture;
-    private Button locateButton;
+    private ImageButton locateButton;
 
     private Card card;
 
@@ -48,7 +45,7 @@ public class CardDetailActivity extends TrackedSherlockActivity {
         phone2 = (TextView) findViewById(R.id.card_detail_phone_2);
         picture = (ImageView) findViewById(R.id.card_detail_picture);
 
-        locateButton = (Button) findViewById(R.id.card_detail_locate);
+        locateButton = (ImageButton) findViewById(R.id.card_detail_locate);
         locateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

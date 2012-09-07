@@ -88,11 +88,12 @@
                           android:layout_marginTop="4dip"
                           android:text="@string/card_detail_website"/>
 
-                <Button android:id="@+id/card_detail_locate"
-                        android:layout_width="fill_parent" android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dip" android:layout_marginRight="30dip"
-                        android:layout_marginTop="30dip" android:layout_marginBottom="30dip"
-                        android:text="@string/card_detail_locate"/>
+                <ImageButton android:id="@+id/card_detail_locate"
+                             android:layout_width="wrap_content" android:layout_height="wrap_content"
+                             android:layout_gravity="center_horizontal"
+                             android:layout_marginTop="30dip" android:layout_marginBottom="30dip"
+                             android:src="@drawable/btn_localize"
+                             android:background="@android:color/transparent"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

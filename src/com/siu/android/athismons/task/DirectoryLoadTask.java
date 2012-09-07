@@ -9,11 +9,12 @@ import com.siu.android.andutils.util.CryptoUtils;
 import com.siu.android.andutils.util.NetworkUtils;
 import com.siu.android.athismons.AppConstants;
 import com.siu.android.athismons.Application;
+import com.siu.android.athismons.activity.DirectoryActivity;
 import com.siu.android.athismons.dao.DatabaseHelper;
-import com.siu.android.athismons.dao.model.*;
+import com.siu.android.athismons.dao.model.Card;
+import com.siu.android.athismons.dao.model.CardDao;
 import com.siu.android.athismons.dao.model.Directory;
-import com.siu.android.athismons.fragment.DirectoryFragment;
-import com.siu.android.athismons.fragment.DirectoryFragment;
+import com.siu.android.athismons.dao.model.DirectoryDao;
 import com.siu.android.athismons.sax.SaxParser;
 
 import java.util.Iterator;
@@ -24,10 +25,10 @@ import java.util.List;
  */
 public class DirectoryLoadTask extends AsyncTask<Void, List<Directory>, List<Directory>> {
 
-    private DirectoryFragment fragment;
+    private DirectoryActivity fragment;
     private SharedPreferences preferences;
 
-    public DirectoryLoadTask(DirectoryFragment fragment) {
+    public DirectoryLoadTask(DirectoryActivity fragment) {
         this.fragment = fragment;
         this.preferences = PreferenceManager.getDefaultSharedPreferences(Application.getContext());
     }
@@ -92,20 +93,20 @@ public class DirectoryLoadTask extends AsyncTask<Void, List<Directory>, List<Dir
         return Directoryes;
     }
 
-    @Override
-    protected void onProgressUpdate(List<Directory>... res) {
-        if (null == fragment.getActivity()) {
-            return;
-        }
-
-        fragment.onLoadTaskProgress(res[0]);
-    }
+//    @Override
+//    protected void onProgressUpdate(List<Directory>... res) {
+//        if (null == fragment.getActivity()) {
+//            return;
+//        }
+//
+//        fragment.onLoadTaskProgress(res[0]);
+//    }
 
     @Override
     protected void onPostExecute(List<Directory> res) {
-        if (null == fragment.getActivity()) {
-            return;
-        }
+//        if (null == fragment.getActivity()) {
+//            return;
+//        }
 
         fragment.onLoadTaskFinished(res);
     }

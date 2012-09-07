@@ -118,7 +118,6 @@ public class NewsFragment extends TabSherlockFragment {
 
         newsLoadTask.cancel(true);
         newsLoadTask = null;
-        HttpManager.getInstance().closeActivesRequests();
         getSherlockActivity().setSupportProgressBarIndeterminateVisibility(false);
     }
 

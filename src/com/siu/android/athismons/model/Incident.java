@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
  */
 public class Incident {
 
+    private int typeId;
     private String type;
     private String description;
     private String address;
@@ -14,6 +15,14 @@ public class Incident {
     private String lastname;
     private String email;
     private Bitmap bitmap;
+
+    public int getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
+    }
 
     public String getType() {
         return type;

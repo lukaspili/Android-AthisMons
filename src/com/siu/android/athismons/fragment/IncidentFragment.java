@@ -23,8 +23,7 @@ import com.siu.android.athismons.task.IncidentSubmitTask;
  */
 public class IncidentFragment extends TabSherlockFragment {
 
-    private Button addPictureButton, sendButton;
-    private ImageButton locateButton;
+    private ImageButton locateButton, addPictureButton, sendButton;
     private TextView address, description, firstname, lastname, email;
 
     private Spinner incidentTypesSpinner;
@@ -49,9 +48,9 @@ public class IncidentFragment extends TabSherlockFragment {
         View view = inflater.inflate(R.layout.incident_fragment, container, false);
 
         incidentTypesSpinner = (Spinner) view.findViewById(R.id.incident_types_spinner);
-        addPictureButton = (Button) view.findViewById(R.id.incident_add_picture_button);
+        addPictureButton = (ImageButton) view.findViewById(R.id.incident_add_picture_button);
         locateButton = (ImageButton) view.findViewById(R.id.incident_locate_button);
-        sendButton = (Button) view.findViewById(R.id.incident_send_button);
+        sendButton = (ImageButton) view.findViewById(R.id.incident_send_button);
         description = (TextView) view.findViewById(R.id.incident_description);
         address = (TextView) view.findViewById(R.id.incident_address);
         lastname = (TextView) view.findViewById(R.id.incident_lastname);
@@ -69,7 +68,7 @@ public class IncidentFragment extends TabSherlockFragment {
         initButtons();
 
         if (null != incident.getBitmap()) {
-            addPictureButton.setText(R.string.incident_change_picture);
+//            addPictureButton.setText(R.string.incident_change_picture);
         }
     }
 
@@ -96,6 +95,7 @@ public class IncidentFragment extends TabSherlockFragment {
         incidentTypesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                incident.setTypeId(i);
                 if (i == 0) {
                     incident.setType(null);
                 } else {
@@ -182,21 +182,32 @@ public class IncidentFragment extends TabSherlockFragment {
         }
 
         incident.setBitmap((Bitmap) intentData.getExtras().get("data"));
-        addPictureButton.setText(R.string.incident_change_picture);
+//        addPictureButton.setText(R.string.incident_change_picture);
     }
 
     public void startIncidentSubmitTask() {
+        // validation
+        if (incident.getTypeId() == 0) {
+            Toast.makeText(getActivity(), "Veuillez renseigner un type d'incident", Toast.LENGTH_SHORT).show();
+            return;
+        } else if(incident.getAddress() == null) {
+            Toast.makeText(getActivity(), "Veuillez renseigner l'adresse de l'incident", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (null == incidentSubmitProgressDialog) {
             incidentSubmitProgressDialog = new IncidentSubmitProgressDialog(this);
         }
 
         FragmentUtils.showDialog(getFragmentManager(), incidentSubmitProgressDialog);
 
+
         incidentSubmitTask = new IncidentSubmitTask(this, incident);
         incidentSubmitTask.execute();
     }
 
     public void onIncidentSubmitTaskFinished(Boolean result) {
+        // ugly fix for strange exception happening with rotation
         try {
             incidentSubmitProgressDialog.dismiss();
         } catch (Exception e) {
@@ -207,6 +218,12 @@ public class IncidentFragment extends TabSherlockFragment {
 
         if (result) {
             Toast.makeText(getActivity(), R.string.incident_submit_success, Toast.LENGTH_LONG).show();
+            incidentTypesSpinner.setPromptId(0);
+            address.setText("");
+            description.setText("");
+            firstname.setText("");
+            lastname.setText("");
+            email.setText("");
         } else {
             Toast.makeText(getActivity(), R.string.incident_submit_failed, Toast.LENGTH_LONG).show();
         }

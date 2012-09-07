@@ -9,6 +9,7 @@ import com.siu.android.andutils.util.CryptoUtils;
 import com.siu.android.andutils.util.NetworkUtils;
 import com.siu.android.athismons.AppConstants;
 import com.siu.android.athismons.Application;
+import com.siu.android.athismons.activity.AgendaListActivity;
 import com.siu.android.athismons.dao.DatabaseHelper;
 import com.siu.android.athismons.dao.model.Agenda;
 import com.siu.android.athismons.dao.model.AgendaDao;
@@ -26,10 +27,10 @@ import java.util.List;
  */
 public class AgendaLoadTask extends AsyncTask<Void, List<Agenda>, List<Agenda>> {
 
-    private AgendaFragment fragment;
+    private AgendaListActivity fragment;
     private SharedPreferences preferences;
 
-    public AgendaLoadTask(AgendaFragment fragment) {
+    public AgendaLoadTask(AgendaListActivity fragment) {
         this.fragment = fragment;
         this.preferences = PreferenceManager.getDefaultSharedPreferences(Application.getContext());
     }
@@ -87,18 +88,18 @@ public class AgendaLoadTask extends AsyncTask<Void, List<Agenda>, List<Agenda>> 
 
     @Override
     protected void onProgressUpdate(List<Agenda>... loaded) {
-        if (null == fragment.getActivity()) {
-            return;
-        }
+//        if (null == fragment.getActivity()) {
+//            return;
+//        }
 
         fragment.onLoadTaskProgress(loaded[0]);
     }
 
     @Override
     protected void onPostExecute(List<Agenda> loaded) {
-        if (null == fragment.getActivity()) {
-            return;
-        }
+//        if (null == fragment.getActivity()) {
+//            return;
+//        }
 
         fragment.onLoadTaskFinished(loaded);
     }

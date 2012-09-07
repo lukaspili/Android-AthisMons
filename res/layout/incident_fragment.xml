@@ -72,7 +72,8 @@
 
             <EditText android:id="@+id/incident_lastname"
                       android:layout_width="fill_parent" android:layout_height="wrap_content"
-                      android:hint="@string/incident_lastname_label"/>
+                      android:hint="@string/incident_lastname_label"
+                      android:singleLine="true"/>
 
             <!-- first name -->
             <!--<TextView android:id="@+id/incident_firstname_label"-->
@@ -82,7 +83,8 @@
 
             <EditText android:id="@+id/incident_firstname"
                       android:layout_width="fill_parent" android:layout_height="wrap_content"
-                      android:hint="@string/incident_firstname_label"/>
+                      android:hint="@string/incident_firstname_label"
+                      android:singleLine="true"/>
 
             <!-- email -->
             <!--<TextView android:id="@+id/incident_email_label"-->
@@ -93,21 +95,24 @@
             <EditText android:id="@+id/incident_email"
                       android:layout_width="fill_parent" android:layout_height="wrap_content"
                       android:layout_marginBottom="15dip"
-                      android:hint="@string/incident_email_label"/>
+                      android:hint="@string/incident_email_label"
+                      android:singleLine="true"/>
 
             <!-- picture button -->
-            <Button android:id="@+id/incident_add_picture_button"
-                    android:layout_width="fill_parent" android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dip" android:layout_marginRight="20dip"
-                    android:layout_marginBottom="5dip"
-                    android:text="@string/incident_add_picture"/>
+            <ImageButton android:id="@+id/incident_add_picture_button"
+                         android:layout_width="fill_parent" android:layout_height="wrap_content"
+                         android:layout_marginLeft="20dip" android:layout_marginRight="20dip"
+                         android:layout_marginBottom="10dip"
+                         android:src="@drawable/btn_take_picture"
+                         android:background="@android:color/transparent"/>
 
             <!-- send button -->
-            <Button android:id="@+id/incident_send_button"
-                    android:layout_width="fill_parent" android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dip" android:layout_marginRight="20dip"
-                    android:layout_marginBottom="15dip"
-                    android:text="@string/incident_send"/>
+            <ImageButton android:id="@+id/incident_send_button"
+                         android:layout_width="fill_parent" android:layout_height="wrap_content"
+                         android:layout_marginLeft="20dip" android:layout_marginRight="20dip"
+                         android:layout_marginBottom="15dip"
+                         android:src="@drawable/btn_send_incident"
+                         android:background="@android:color/transparent"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -60,10 +60,16 @@
     <string-array name="incident_types">
         <item>Nature de l\'accident</item>
         <item>Voirie urbaine</item>
-        <item>Eclairage</item>
+        <item>Eclairage public</item>
         <item>Feux tricolores</item>
-        <item>Graffitis</item>
-        <item>Collecte de déchêt</item>
+        <item>Signalisation horizontale et verticale</item>
+        <item>Graffitis, tags</item>
+        <item>Collecte des déchets, tri sélectif</item>
+        <item>Épaves et véhicules ventouses</item>
+        <item>Dégradations sur la voie publique</item>
+        <item>Espaces verts</item>
+        <item>Assainissement</item>
+        <item>Autre</item>
     </string-array>
 
 </resources>
