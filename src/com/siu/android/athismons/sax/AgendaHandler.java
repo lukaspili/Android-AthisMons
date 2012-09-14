@@ -28,7 +28,7 @@ public class AgendaHandler extends AbstractHandler<Agenda> {
         }
 
         if (localName.equalsIgnoreCase("title")) {
-            String[] s = value.split("-", 2);
+            String[] s = value.split("--", 2);
             if (s.length == 2) {
                 element.setCategory(s[0].trim());
                 element.setTitle(s[1].trim());
