@@ -47,6 +47,10 @@ public class DirectoryHandler extends AbstractHandler<Directory> {
         if (localName.equalsIgnoreCase("intitule")) {
             element.setTitle(value);
         } else if (localName.equalsIgnoreCase("visuel")) {
+            // if url dont start with http, add it because image url loader will fail
+            if (!value.startsWith("http://")) {
+                value = "http://" + value;
+            }
             element.setListPicture(value);
         }
 
@@ -84,6 +88,8 @@ public class DirectoryHandler extends AbstractHandler<Directory> {
             card.setPicture(value);
         } else if (localName.equalsIgnoreCase("visuel")) {
             card.setListPicture(value);
+        } else if (localName.equalsIgnoreCase("permalien")) {
+            card.setUrl(value);
         }
 
         // lat / long

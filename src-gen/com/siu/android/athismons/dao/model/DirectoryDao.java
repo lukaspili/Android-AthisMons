@@ -26,6 +26,7 @@ public class DirectoryDao extends AbstractDao<Directory, Long> {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Title = new Property(1, String.class, "title", false, "TITLE");
         public final static Property ListPicture = new Property(2, String.class, "listPicture", false, "LIST_PICTURE");
+        public final static Property Url = new Property(3, String.class, "url", false, "URL");
     };
 
     private DaoSession daoSession;
@@ -46,7 +47,8 @@ public class DirectoryDao extends AbstractDao<Directory, Long> {
         db.execSQL("CREATE TABLE " + constraint + "'DIRECTORY' (" + //
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
                 "'TITLE' TEXT," + // 1: title
-                "'LIST_PICTURE' TEXT);"); // 2: listPicture
+                "'LIST_PICTURE' TEXT," + // 2: listPicture
+                "'URL' TEXT);"); // 3: url
     }
 
     /** Drops the underlying database table. */
@@ -74,6 +76,11 @@ public class DirectoryDao extends AbstractDao<Directory, Long> {
         if (listPicture != null) {
             stmt.bindString(3, listPicture);
         }
+ 
+        String url = entity.getUrl();
+        if (url != null) {
+            stmt.bindString(4, url);
+        }
     }
 
     @Override
@@ -94,7 +101,8 @@ public class DirectoryDao extends AbstractDao<Directory, Long> {
         Directory entity = new Directory( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // title
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2) // listPicture
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // listPicture
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // url
         );
         return entity;
     }
@@ -105,6 +113,7 @@ public class DirectoryDao extends AbstractDao<Directory, Long> {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setTitle(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setListPicture(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setUrl(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
      }
     
     /** @inheritdoc */

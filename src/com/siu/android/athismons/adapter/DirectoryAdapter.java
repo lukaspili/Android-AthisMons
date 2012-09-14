@@ -1,6 +1,7 @@
 package com.siu.android.athismons.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.siu.android.andutils.adapter.SimpleAdapter;
@@ -24,11 +25,10 @@ public class DirectoryAdapter extends SimpleAdapter<Directory, DirectoryViewHold
         viewHolder.title.setText(directory.getTitle());
 
         if (StringUtils.isNotEmpty(directory.getListPicture())) {
-//            viewHolder.image.setVisibility(View.VISIBLE);
+            viewHolder.image.setVisibility(View.VISIBLE);
             UrlImageViewHelper.setUrlDrawable(viewHolder.image, directory.getListPicture());
         } else {
-//            viewHolder.image.setVisibility(View.GONE);
-            viewHolder.image.setImageResource(R.drawable.default_row_image);
+            viewHolder.image.setVisibility(View.GONE);
         }
     }
 

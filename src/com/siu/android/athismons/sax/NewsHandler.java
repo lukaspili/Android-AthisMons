@@ -35,7 +35,7 @@ public class NewsHandler extends AbstractHandler<News> {
         }
 
         if (localName.equalsIgnoreCase("title")) {
-            String[] s = value.split("–", 2);
+            String[] s = value.split("\u2014", 2);
             if (s.length == 2) {
                 element.setCategory(s[0].trim());
                 element.setTitle(s[1].trim());
@@ -53,6 +53,9 @@ public class NewsHandler extends AbstractHandler<News> {
 
         } else if (localName.equalsIgnoreCase("description")) {
             element.setDescription(value);
+
+        } else if (localName.equalsIgnoreCase("link")) {
+            element.setUrl(value);
 
         } else if (localName.equalsIgnoreCase("item")) {
             list.add(element);

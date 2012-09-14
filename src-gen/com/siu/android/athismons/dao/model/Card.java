@@ -25,6 +25,7 @@ public class Card implements java.io.Serializable {
     private String listPicture;
     private Double latitude;
     private Double longitude;
+    private String url;
     private long directoryId;
 
     // KEEP FIELDS - put your custom fields here
@@ -37,7 +38,7 @@ public class Card implements java.io.Serializable {
         this.id = id;
     }
 
-    public Card(Long id, String title, String building, String street, String city, String postalCode, String addressComplement, String picture, String contact, String website, String email, String phone1, String phone2, String listPicture, Double latitude, Double longitude, long directoryId) {
+    public Card(Long id, String title, String building, String street, String city, String postalCode, String addressComplement, String picture, String contact, String website, String email, String phone1, String phone2, String listPicture, Double latitude, Double longitude, String url, long directoryId) {
         this.id = id;
         this.title = title;
         this.building = building;
@@ -54,6 +55,7 @@ public class Card implements java.io.Serializable {
         this.listPicture = listPicture;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.url = url;
         this.directoryId = directoryId;
     }
 
@@ -183,6 +185,14 @@ public class Card implements java.io.Serializable {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public long getDirectoryId() {

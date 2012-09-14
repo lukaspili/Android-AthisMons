@@ -7,13 +7,14 @@ package com.siu.android.athismons.dao.model;
 /**
  * Entity mapped to table AGENDA.
  */
-public class Agenda implements java.io.Serializable {
+public class Agenda implements java.io.Serializable, com.siu.android.athismons.model.Detail {
 
     private Long id;
     private String title;
     private String category;
     private String image;
     private String description;
+    private String url;
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
@@ -25,12 +26,13 @@ public class Agenda implements java.io.Serializable {
         this.id = id;
     }
 
-    public Agenda(Long id, String title, String category, String image, String description) {
+    public Agenda(Long id, String title, String category, String image, String description, String url) {
         this.id = id;
         this.title = title;
         this.category = category;
         this.image = image;
         this.description = description;
+        this.url = url;
     }
 
     public Long getId() {
@@ -73,7 +75,20 @@ public class Agenda implements java.io.Serializable {
         this.description = description;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     // KEEP METHODS - put your custom methods here
+
+    @Override
+    public String getContent() {
+        return description;
+    }
     // KEEP METHODS END
 
 }

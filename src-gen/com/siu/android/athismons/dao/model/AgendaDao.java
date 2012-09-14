@@ -28,6 +28,7 @@ public class AgendaDao extends AbstractDao<Agenda, Long> {
         public final static Property Category = new Property(2, String.class, "category", false, "CATEGORY");
         public final static Property Image = new Property(3, String.class, "image", false, "IMAGE");
         public final static Property Description = new Property(4, String.class, "description", false, "DESCRIPTION");
+        public final static Property Url = new Property(5, String.class, "url", false, "URL");
     };
 
 
@@ -47,7 +48,8 @@ public class AgendaDao extends AbstractDao<Agenda, Long> {
                 "'TITLE' TEXT," + // 1: title
                 "'CATEGORY' TEXT," + // 2: category
                 "'IMAGE' TEXT," + // 3: image
-                "'DESCRIPTION' TEXT);"); // 4: description
+                "'DESCRIPTION' TEXT," + // 4: description
+                "'URL' TEXT);"); // 5: url
     }
 
     /** Drops the underlying database table. */
@@ -85,6 +87,11 @@ public class AgendaDao extends AbstractDao<Agenda, Long> {
         if (description != null) {
             stmt.bindString(5, description);
         }
+ 
+        String url = entity.getUrl();
+        if (url != null) {
+            stmt.bindString(6, url);
+        }
     }
 
     /** @inheritdoc */
@@ -101,7 +108,8 @@ public class AgendaDao extends AbstractDao<Agenda, Long> {
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // title
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // category
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // image
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // description
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // description
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // url
         );
         return entity;
     }
@@ -114,6 +122,7 @@ public class AgendaDao extends AbstractDao<Agenda, Long> {
         entity.setCategory(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setImage(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setDescription(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setUrl(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
      }
     
     /** @inheritdoc */

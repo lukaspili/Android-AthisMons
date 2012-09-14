@@ -39,6 +39,9 @@ public class AgendaHandler extends AbstractHandler<Agenda> {
         } else if (localName.equalsIgnoreCase("description")) {
             element.setDescription(value);
 
+        } else if (localName.equalsIgnoreCase("link")) {
+            element.setUrl(value);
+
         } else if (localName.equalsIgnoreCase("item")) {
             list.add(element);
             element = null;

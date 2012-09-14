@@ -42,7 +42,8 @@ public class CardDao extends AbstractDao<Card, Long> {
         public final static Property ListPicture = new Property(13, String.class, "listPicture", false, "LIST_PICTURE");
         public final static Property Latitude = new Property(14, Double.class, "latitude", false, "LATITUDE");
         public final static Property Longitude = new Property(15, Double.class, "longitude", false, "LONGITUDE");
-        public final static Property DirectoryId = new Property(16, long.class, "directoryId", false, "DIRECTORY_ID");
+        public final static Property Url = new Property(16, String.class, "url", false, "URL");
+        public final static Property DirectoryId = new Property(17, long.class, "directoryId", false, "DIRECTORY_ID");
     };
 
     private Query<Card> directory_CardListQuery;
@@ -75,7 +76,8 @@ public class CardDao extends AbstractDao<Card, Long> {
                 "'LIST_PICTURE' TEXT," + // 13: listPicture
                 "'LATITUDE' REAL," + // 14: latitude
                 "'LONGITUDE' REAL," + // 15: longitude
-                "'DIRECTORY_ID' INTEGER NOT NULL );"); // 16: directoryId
+                "'URL' TEXT," + // 16: url
+                "'DIRECTORY_ID' INTEGER NOT NULL );"); // 17: directoryId
     }
 
     /** Drops the underlying database table. */
@@ -168,7 +170,12 @@ public class CardDao extends AbstractDao<Card, Long> {
         if (longitude != null) {
             stmt.bindDouble(16, longitude);
         }
-        stmt.bindLong(17, entity.getDirectoryId());
+ 
+        String url = entity.getUrl();
+        if (url != null) {
+            stmt.bindString(17, url);
+        }
+        stmt.bindLong(18, entity.getDirectoryId());
     }
 
     /** @inheritdoc */
@@ -197,7 +204,8 @@ public class CardDao extends AbstractDao<Card, Long> {
             cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // listPicture
             cursor.isNull(offset + 14) ? null : cursor.getDouble(offset + 14), // latitude
             cursor.isNull(offset + 15) ? null : cursor.getDouble(offset + 15), // longitude
-            cursor.getLong(offset + 16) // directoryId
+            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // url
+            cursor.getLong(offset + 17) // directoryId
         );
         return entity;
     }
@@ -221,7 +229,8 @@ public class CardDao extends AbstractDao<Card, Long> {
         entity.setListPicture(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
         entity.setLatitude(cursor.isNull(offset + 14) ? null : cursor.getDouble(offset + 14));
         entity.setLongitude(cursor.isNull(offset + 15) ? null : cursor.getDouble(offset + 15));
-        entity.setDirectoryId(cursor.getLong(offset + 16));
+        entity.setUrl(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
+        entity.setDirectoryId(cursor.getLong(offset + 17));
      }
     
     /** @inheritdoc */

@@ -13,6 +13,8 @@ public class MenuHandler extends AbstractHandler<Menu> {
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         if (localName.equalsIgnoreCase("item")) {
             element = new Menu();
+        } else if (localName.equalsIgnoreCase("enclosure")) {
+            element.setPicture(attributes.getValue("url"));
         }
 
         value = null; // reset value each time

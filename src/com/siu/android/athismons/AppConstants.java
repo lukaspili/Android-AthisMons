@@ -14,7 +14,7 @@ public class AppConstants {
 
     public static final String PERSONAL_SPACE_URL = "https://athis-mons.espace-citoyens.net/Pages/ChoixPrincipal.aspx";
 
-    public static final String[] INCIDENT_EMAIL_GENERAL = {"pgoupil@mairie-athis-mons.fr", "klozes@mairie-athis-mons.fr", "lukasz.pili@gmail.com", "gvettu@gmail.com"};
+    public static final String[] INCIDENT_EMAIL_GENERAL = {"pgoupil@mairie-athis-mons.fr", "klozes@mairie-athis-mons.fr"};
     public static final String[] INCIDENT_EMAIL_CAT1 = {"voirie@portesessonne.fr"};
     public static final String[] INCIDENT_EMAIL_CAT2 = {"domainepublic@portesessonne.fr"};
     public static final String[] INCIDENT_EMAIL_CAT3 = {"domainepublic@portesessonne.fr"};
@@ -38,5 +38,5 @@ public class AppConstants {
     public static final int MAX_DISTANCE = 5;
     public static final long MAX_TIME = AlarmManager.INTERVAL_FIFTEEN_MINUTES;
 
-    public static final boolean DEBUG = false;
+    public static final boolean DEBUG = true;
 }

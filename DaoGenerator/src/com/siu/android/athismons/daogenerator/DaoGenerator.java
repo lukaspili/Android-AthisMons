@@ -17,26 +17,31 @@ public class DaoGenerator {
 
         Entity news = schema.addEntity("News");
         news.implementsSerializable();
+        news.implementsInterface("com.siu.android.athismons.model.Detail");
         news.addIdProperty();
         news.addStringProperty("title");
         news.addStringProperty("category");
         news.addStringProperty("image");
         news.addStringProperty("pubDate");
         news.addStringProperty("description");
+        news.addStringProperty("url");
 
         Entity agenda = schema.addEntity("Agenda");
         agenda.implementsSerializable();
+        agenda.implementsInterface("com.siu.android.athismons.model.Detail");
         agenda.addIdProperty();
         agenda.addStringProperty("title");
         agenda.addStringProperty("category");
         agenda.addStringProperty("image");
         agenda.addStringProperty("description");
+        agenda.addStringProperty("url");
 
         Entity directory = schema.addEntity("Directory");
         directory.implementsSerializable();
         directory.addIdProperty();
         directory.addStringProperty("title");
         directory.addStringProperty("listPicture");
+        directory.addStringProperty("url");
 
         Entity card = schema.addEntity("Card");
         card.implementsSerializable();
@@ -56,12 +61,14 @@ public class DaoGenerator {
         card.addStringProperty("listPicture");
         card.addDoubleProperty("latitude");
         card.addDoubleProperty("longitude");
+        card.addStringProperty("url");
 
         Property directoryId = card.addLongProperty("directoryId").notNull().getProperty();
         ToMany customerToOrders = directory.addToMany(card, directoryId);
 
         Entity menu = schema.addEntity("Menu");
         menu.implementsSerializable();
+        menu.implementsInterface("com.siu.android.athismons.model.Detail");
         menu.addIdProperty();
         menu.addStringProperty("title");
         menu.addStringProperty("description");

@@ -1,6 +1,7 @@
 package com.siu.android.athismons.adapter;
 
 import android.content.Context;
+import android.view.View;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.siu.android.andutils.adapter.SimpleAdapter;
 import com.siu.android.athismons.R;
@@ -23,11 +24,10 @@ public class MenuAdapter extends SimpleAdapter<Menu, MenuViewHolder> {
         viewHolder.title.setText(menu.getTitle());
 
         if (StringUtils.isNotEmpty(menu.getPicture())) {
-//            viewHolder.image.setVisibility(View.VISIBLE);
+            viewHolder.image.setVisibility(View.VISIBLE);
             UrlImageViewHelper.setUrlDrawable(viewHolder.image, menu.getPicture());
         } else {
-            viewHolder.image.setImageResource(R.drawable.default_row_image);
-//            viewHolder.image.setVisibility(View.GONE);
+            viewHolder.image.setVisibility(View.GONE);
         }
     }
 
