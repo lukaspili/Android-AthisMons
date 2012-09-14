@@ -36,6 +36,7 @@ public class DaoGenerator {
         directory.implementsSerializable();
         directory.addIdProperty();
         directory.addStringProperty("title");
+        directory.addStringProperty("listPicture");
 
         Entity card = schema.addEntity("Card");
         card.implementsSerializable();
@@ -52,6 +53,7 @@ public class DaoGenerator {
         card.addStringProperty("email");
         card.addStringProperty("phone1");
         card.addStringProperty("phone2");
+        card.addStringProperty("listPicture");
         card.addDoubleProperty("latitude");
         card.addDoubleProperty("longitude");
 
@@ -64,6 +66,7 @@ public class DaoGenerator {
         menu.addStringProperty("title");
         menu.addStringProperty("description");
         menu.addStringProperty("link");
+        menu.addStringProperty("picture");
 
         new de.greenrobot.daogenerator.DaoGenerator().generateAll(schema, "./src-gen");
     }

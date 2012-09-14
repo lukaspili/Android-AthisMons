@@ -99,8 +99,8 @@ public class AgendaFragment extends TabSherlockFragment {
         stopLoadTaskIfRunning();
 
         getSherlockActivity().setSupportProgressBarIndeterminateVisibility(true);
-//        loadTask = new AgendaLoadTask(this);
-//        loadTask.execute();
+        loadTask = new AgendaLoadTask(this);
+        loadTask.execute();
     }
 
     public void onLoadTaskProgress(List<Agenda> loadedAgendas) {

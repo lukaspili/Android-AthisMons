@@ -81,8 +81,8 @@ public class AgendaListActivity extends TrackedSherlockActivity {
         stopLoadTaskIfRunning();
 
         setSupportProgressBarIndeterminateVisibility(true);
-        loadTask = new AgendaLoadTask(this);
-        loadTask.execute();
+//        loadTask = new AgendaLoadTask(this);
+//        loadTask.execute();
     }
 
     public void onLoadTaskProgress(List<Agenda> loadedAgendas) {

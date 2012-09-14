@@ -7,19 +7,21 @@ import android.location.LocationListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import com.siu.android.andutils.location.GetLastLocation;
+import com.siu.android.andutils.location.GetLastLocationFactory;
 import com.siu.android.athismons.AppConstants;
 import com.siu.android.athismons.Application;
 import com.siu.android.athismons.fragment.IncidentFragment;
-import com.siu.android.athismons.location.GetLastLocation;
-import com.siu.android.athismons.location.GetLastLocationFactory;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * @author Lukasz Piliszczuk <lukasz.pili AT gmail.com>
  */
-public class GetLastLocationAddressTask extends AsyncTask<Void, Void, String> {
+public class GetLastLocationAddressTask extends AsyncTask<Void, Void, Map<String, String>> {
 
     private IncidentFragment fragment;
     private Location location;
@@ -29,7 +31,7 @@ public class GetLastLocationAddressTask extends AsyncTask<Void, Void, String> {
     }
 
     @Override
-    protected String doInBackground(Void... voids) {
+    protected Map<String, String> doInBackground(Void... voids) {
         Log.d(getClass().getName(), "GetLastLocationAddressTask");
 
         GetLastLocation getLastLocation = GetLastLocationFactory.getLastLocationFinder(Application.getContext());
@@ -52,7 +54,19 @@ public class GetLastLocationAddressTask extends AsyncTask<Void, Void, String> {
             }
         });
 
-        location = getLastLocation.getLastBestLocation(AppConstants.MAX_DISTANCE, AppConstants.MAX_TIME);
+        try {
+            location = getLastLocation.getLastBestLocation(AppConstants.MAX_DISTANCE, AppConstants.MAX_TIME);
+        } catch (Exception e) {
+            return null;
+        }
+
+//        MyLocation location1 = new MyLocation();
+//        boolean res = location1.getLocation(fragment.getActivity(), new MyLocation.LocationResult() {
+//            @Override
+//            public void gotLocation(Location location) {
+//                GetLastLocationAddressTask.this.location = location;
+//            }
+//        });
 
         if (isCancelled()) {
             return null;
@@ -90,7 +104,12 @@ public class GetLastLocationAddressTask extends AsyncTask<Void, Void, String> {
                 }
             }
 
-            return builder.toString();
+            Map<String, String> res = new HashMap<String, String>();
+            res.put("latitude", String.valueOf(location.getLatitude()));
+            res.put("longitude", String.valueOf(location.getLongitude()));
+            res.put("address", builder.toString());
+
+            return res;
 
         } catch (Exception e) {
             Log.e(getClass().getName(), "Cannot get address from location with geocoder", e);
@@ -98,13 +117,14 @@ public class GetLastLocationAddressTask extends AsyncTask<Void, Void, String> {
         }
     }
 
+
     @Override
-    protected void onPostExecute(String s) {
+    protected void onPostExecute(Map<String, String> res) {
         if (null == fragment.getActivity()) {
             return;
         }
 
-        fragment.onGetLastLocationAddressTaskFinished(s);
+        fragment.onGetLastLocationAddressTaskFinished(res);
     }
 
 

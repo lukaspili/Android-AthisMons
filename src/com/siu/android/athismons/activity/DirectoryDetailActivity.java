@@ -39,7 +39,9 @@ public class DirectoryDetailActivity extends TrackedSherlockActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.directory_detail_activity);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         listView = (ListView) findViewById(R.id.list);
         title = (TextView) findViewById(R.id.directory_detail_title);

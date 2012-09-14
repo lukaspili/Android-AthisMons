@@ -16,6 +16,7 @@ public class Directory implements java.io.Serializable {
 
     private Long id;
     private String title;
+    private String listPicture;
 
     /** Used to resolve relations */
     private transient DaoSession daoSession;
@@ -36,9 +37,10 @@ public class Directory implements java.io.Serializable {
         this.id = id;
     }
 
-    public Directory(Long id, String title) {
+    public Directory(Long id, String title, String listPicture) {
         this.id = id;
         this.title = title;
+        this.listPicture = listPicture;
     }
 
     /** called by internal mechanisms, do not call yourself. */
@@ -61,6 +63,14 @@ public class Directory implements java.io.Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getListPicture() {
+        return listPicture;
+    }
+
+    public void setListPicture(String listPicture) {
+        this.listPicture = listPicture;
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */

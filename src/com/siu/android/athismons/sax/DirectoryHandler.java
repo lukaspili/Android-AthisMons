@@ -3,7 +3,6 @@ package com.siu.android.athismons.sax;
 import android.util.Log;
 import com.siu.android.athismons.dao.model.Card;
 import com.siu.android.athismons.dao.model.Directory;
-import com.siu.android.athismons.dao.model.News;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -47,6 +46,8 @@ public class DirectoryHandler extends AbstractHandler<Directory> {
     private void parseDirectory(String localName) {
         if (localName.equalsIgnoreCase("intitule")) {
             element.setTitle(value);
+        } else if (localName.equalsIgnoreCase("visuel")) {
+            element.setListPicture(value);
         }
 
         // end dirctory tag
@@ -81,6 +82,8 @@ public class DirectoryHandler extends AbstractHandler<Directory> {
             card.setWebsite(value);
         } else if (localName.equalsIgnoreCase("petit")) {
             card.setPicture(value);
+        } else if (localName.equalsIgnoreCase("visuel")) {
+            card.setListPicture(value);
         }
 
         // lat / long

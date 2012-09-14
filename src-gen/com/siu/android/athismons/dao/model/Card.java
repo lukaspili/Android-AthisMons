@@ -22,6 +22,7 @@ public class Card implements java.io.Serializable {
     private String email;
     private String phone1;
     private String phone2;
+    private String listPicture;
     private Double latitude;
     private Double longitude;
     private long directoryId;
@@ -36,7 +37,7 @@ public class Card implements java.io.Serializable {
         this.id = id;
     }
 
-    public Card(Long id, String title, String building, String street, String city, String postalCode, String addressComplement, String picture, String contact, String website, String email, String phone1, String phone2, Double latitude, Double longitude, long directoryId) {
+    public Card(Long id, String title, String building, String street, String city, String postalCode, String addressComplement, String picture, String contact, String website, String email, String phone1, String phone2, String listPicture, Double latitude, Double longitude, long directoryId) {
         this.id = id;
         this.title = title;
         this.building = building;
@@ -50,6 +51,7 @@ public class Card implements java.io.Serializable {
         this.email = email;
         this.phone1 = phone1;
         this.phone2 = phone2;
+        this.listPicture = listPicture;
         this.latitude = latitude;
         this.longitude = longitude;
         this.directoryId = directoryId;
@@ -157,6 +159,14 @@ public class Card implements java.io.Serializable {
 
     public void setPhone2(String phone2) {
         this.phone2 = phone2;
+    }
+
+    public String getListPicture() {
+        return listPicture;
+    }
+
+    public void setListPicture(String listPicture) {
+        this.listPicture = listPicture;
     }
 
     public Double getLatitude() {

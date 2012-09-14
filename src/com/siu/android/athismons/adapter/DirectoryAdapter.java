@@ -6,7 +6,6 @@ import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.siu.android.andutils.adapter.SimpleAdapter;
 import com.siu.android.athismons.R;
 import com.siu.android.athismons.dao.model.Directory;
-import com.siu.android.athismons.dao.model.News;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
@@ -23,6 +22,14 @@ public class DirectoryAdapter extends SimpleAdapter<Directory, DirectoryViewHold
     @Override
     protected void configure(DirectoryViewHolder viewHolder, Directory directory) {
         viewHolder.title.setText(directory.getTitle());
+
+        if (StringUtils.isNotEmpty(directory.getListPicture())) {
+//            viewHolder.image.setVisibility(View.VISIBLE);
+            UrlImageViewHelper.setUrlDrawable(viewHolder.image, directory.getListPicture());
+        } else {
+//            viewHolder.image.setVisibility(View.GONE);
+            viewHolder.image.setImageResource(R.drawable.default_row_image);
+        }
     }
 
     @Override

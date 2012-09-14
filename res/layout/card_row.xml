@@ -4,6 +4,12 @@
                 android:layout_width="fill_parent" android:layout_height="wrap_content"
                 android:paddingLeft="5dip" android:paddingTop="5dip" android:paddingBottom="5dip">
 
+    <ImageView android:id="@+id/card_row_image"
+               android:layout_width="75dip" android:layout_height="75dip"
+               android:layout_alignParentTop="true"
+               android:layout_marginRight="5dip"
+               android:scaleType="fitCenter"/>
+
     <ImageView android:id="@+id/card_row_indicator"
                android:layout_width="wrap_content" android:layout_height="wrap_content"
                android:layout_alignParentRight="true"
@@ -12,7 +18,7 @@
 
     <TextView android:id="@+id/card_row_title"
               android:layout_width="fill_parent" android:layout_height="wrap_content"
-              android:layout_alignParentLeft="true"
+              android:layout_toRightOf="@id/card_row_image"
               android:layout_toLeftOf="@id/card_row_indicator"
               android:layout_centerVertical="true"
               android:textSize="16sp"

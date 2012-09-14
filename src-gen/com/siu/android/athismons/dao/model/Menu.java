@@ -13,6 +13,7 @@ public class Menu implements java.io.Serializable {
     private String title;
     private String description;
     private String link;
+    private String picture;
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
@@ -24,11 +25,12 @@ public class Menu implements java.io.Serializable {
         this.id = id;
     }
 
-    public Menu(Long id, String title, String description, String link) {
+    public Menu(Long id, String title, String description, String link, String picture) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.link = link;
+        this.picture = picture;
     }
 
     public Long getId() {
@@ -61,6 +63,14 @@ public class Menu implements java.io.Serializable {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     // KEEP METHODS - put your custom methods here

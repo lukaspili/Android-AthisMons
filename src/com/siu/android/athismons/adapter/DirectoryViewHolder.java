@@ -11,9 +11,11 @@ import com.siu.android.athismons.R;
 public class DirectoryViewHolder extends SimpleViewHolder {
 
     TextView title;
+    ImageView image;
 
     @Override
     public void init() {
         title = (TextView) row.findViewById(R.id.directory_row_title);
+        image = (ImageView) row.findViewById(R.id.directory_row_image);
     }
 }

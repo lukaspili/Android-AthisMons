@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">Athis Mons</string>
 
+    <string-array name="tabs">
+        <item>Actualités</item>
+        <item>Agenda</item>
+        <item>Incidents</item>
+        <item>Menus</item>
+        <item>Annuaire</item>
+        <item>Espace perso</item>
+    </string-array>
+
     <string name="tab_news">Actualités</string>
     <string name="tab_agenda">Agenda</string>
     <string name="tab_incidents">Incidents</string>

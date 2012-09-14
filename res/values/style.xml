@@ -16,9 +16,17 @@
 
         <!--<item name="displayOptions">useLogo|showHome</item>-->
         <!--<item name="android:displayOptions">useLogo|showHome</item>-->
+
+        <item name="actionBarTabBarStyle">@style/App.ActionBarTabs</item>
+        <item name="android:actionBarTabBarStyle">@style/App.ActionBarTabs</item>
     </style>
 
     <style name="Widget.App.Theme.ActionBar.TitleTextStyle" parent="TextAppearance.Sherlock.Widget.ActionBar.Title">
         <item name="android:textColor">#FEFEFE</item>
+    </style>
+
+    <style name="App.ActionBarTabs" parent="Widget.Sherlock.Light.ActionBar.TabBar">
+        <item name="titleTextStyle">@color/white</item>
+        <item name="android:titleTextStyle">@color/white</item>
     </style>
 </resources>

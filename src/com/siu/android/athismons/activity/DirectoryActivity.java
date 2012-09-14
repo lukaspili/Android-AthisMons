@@ -84,8 +84,8 @@ public class DirectoryActivity extends TrackedSherlockActivity {
         }
 
         setSupportProgressBarIndeterminateVisibility(true);
-        loadTask = new DirectoryLoadTask(this);
-        loadTask.execute();
+//        loadTask = new DirectoryLoadTask(this);
+//        loadTask.execute();
     }
 
     public void onLoadTaskFinished(List<Directory> loadedDirectories) {

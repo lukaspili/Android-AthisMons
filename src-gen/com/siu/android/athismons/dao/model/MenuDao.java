@@ -27,6 +27,7 @@ public class MenuDao extends AbstractDao<Menu, Long> {
         public final static Property Title = new Property(1, String.class, "title", false, "TITLE");
         public final static Property Description = new Property(2, String.class, "description", false, "DESCRIPTION");
         public final static Property Link = new Property(3, String.class, "link", false, "LINK");
+        public final static Property Picture = new Property(4, String.class, "picture", false, "PICTURE");
     };
 
 
@@ -45,7 +46,8 @@ public class MenuDao extends AbstractDao<Menu, Long> {
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
                 "'TITLE' TEXT," + // 1: title
                 "'DESCRIPTION' TEXT," + // 2: description
-                "'LINK' TEXT);"); // 3: link
+                "'LINK' TEXT," + // 3: link
+                "'PICTURE' TEXT);"); // 4: picture
     }
 
     /** Drops the underlying database table. */
@@ -78,6 +80,11 @@ public class MenuDao extends AbstractDao<Menu, Long> {
         if (link != null) {
             stmt.bindString(4, link);
         }
+ 
+        String picture = entity.getPicture();
+        if (picture != null) {
+            stmt.bindString(5, picture);
+        }
     }
 
     /** @inheritdoc */
@@ -93,7 +100,8 @@ public class MenuDao extends AbstractDao<Menu, Long> {
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // title
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // description
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // link
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // link
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // picture
         );
         return entity;
     }
@@ -105,6 +113,7 @@ public class MenuDao extends AbstractDao<Menu, Long> {
         entity.setTitle(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setDescription(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setLink(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setPicture(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
      }
     
     /** @inheritdoc */

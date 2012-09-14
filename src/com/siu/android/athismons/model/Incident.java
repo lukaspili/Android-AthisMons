@@ -1,20 +1,25 @@
 package com.siu.android.athismons.model;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
+
+import java.io.Serializable;
 
 /**
  * @author Lukasz Piliszczuk <lukasz.pili AT gmail.com>
  */
-public class Incident {
+public class Incident implements Serializable {
 
     private int typeId;
     private String type;
     private String description;
     private String address;
+    private String latitude;
+    private String longitude;
     private String firstname;
     private String lastname;
     private String email;
-    private Bitmap bitmap;
+    private String pictureUri;
 
     public int getTypeId() {
         return typeId;
@@ -48,6 +53,22 @@ public class Incident {
         this.address = address;
     }
 
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
     public String getFirstname() {
         return firstname;
     }
@@ -72,11 +93,11 @@ public class Incident {
         this.email = email;
     }
 
-    public Bitmap getBitmap() {
-        return bitmap;
+    public String getPictureUri() {
+        return pictureUri;
     }
 
-    public void setBitmap(Bitmap bitmap) {
-        this.bitmap = bitmap;
+    public void setPictureUri(String pictureUri) {
+        this.pictureUri = pictureUri;
     }
 }

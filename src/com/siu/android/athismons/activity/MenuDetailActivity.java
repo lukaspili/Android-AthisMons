@@ -2,7 +2,6 @@ package com.siu.android.athismons.activity;
 
 import android.os.Bundle;
 import android.webkit.WebView;
-import android.widget.TextView;
 import com.actionbarsherlock.view.MenuItem;
 import com.siu.android.andutils.activity.tracker.TrackedSherlockActivity;
 import com.siu.android.andutils.util.WebUtils;
@@ -16,7 +15,6 @@ public class MenuDetailActivity extends TrackedSherlockActivity {
 
     public static final String EXTRA = "extra";
 
-    private TextView title;
     private WebView webView;
 
     private Menu menu;
@@ -24,14 +22,14 @@ public class MenuDetailActivity extends TrackedSherlockActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.menu_detail);
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         menu = (Menu) getIntent().getExtras().get(EXTRA);
-
-        title = (TextView) findViewById(R.id.menu_detail_title);
         webView = (WebView) findViewById(R.id.webview);
 
-        title.setText(menu.getTitle());
         WebUtils.loadToWeview(webView, menu.getDescription());
     }
 
