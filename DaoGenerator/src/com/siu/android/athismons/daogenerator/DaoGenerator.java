@@ -35,6 +35,7 @@ public class DaoGenerator {
         agenda.addStringProperty("image");
         agenda.addStringProperty("description");
         agenda.addStringProperty("url");
+        agenda.addStringProperty("date");
 
         Entity directory = schema.addEntity("Directory");
         directory.implementsSerializable();

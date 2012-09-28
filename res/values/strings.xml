@@ -51,8 +51,7 @@
     <string name="incident_address_label">Adresse</string>
     <string name="incident_locate_myself">Localisez-moi</string>
     <string name="incident_description_label">Description</string>
-    <string name="incident_lastname_label">Nom</string>
-    <string name="incident_firstname_label">Prénom</string>
+    <string name="incident_name_label">Nom</string>
     <string name="incident_email_label">Email</string>
     <string name="incident_send">Envoyer la déclaration</string>
     <string name="incident_address_location_failed">Impossible de déterminer votre adresse à partir de votre localisation.</string>

@@ -20,8 +20,10 @@ import com.siu.android.athismons.AppConstants;
 import com.siu.android.athismons.R;
 import com.siu.android.athismons.actionbar.TabSherlockFragment;
 import com.siu.android.athismons.dialog.IncidentLocationProgressDialog;
+import com.siu.android.athismons.dialog.IncidentSubmitProgressDialog;
 import com.siu.android.athismons.model.Incident;
 import com.siu.android.athismons.task.GetLastLocationAddressTask;
+import com.siu.android.athismons.task.IncidentSubmitTask;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -34,7 +36,8 @@ import java.util.Map;
 public class IncidentFragment extends TabSherlockFragment {
 
     private ImageButton locateButton, addPictureButton, sendButton;
-    private TextView address, description, firstname, lastname, email;
+    private TextView address, description, name, email;
+    private ImageView pictureImageView;
 
     private Spinner incidentTypesSpinner;
     private ArrayAdapter incidentTypesAdapter;
@@ -56,7 +59,6 @@ public class IncidentFragment extends TabSherlockFragment {
 
         @Override
         public void afterTextChanged(Editable editable) {
-            Log.d(getClass().getName(), "Address changed, remove lat/long if exists");
             incident.setLatitude(null);
             incident.setLongitude(null);
 
@@ -64,26 +66,29 @@ public class IncidentFragment extends TabSherlockFragment {
         }
     };
 
-//    private IncidentSubmitTask incidentSubmitTask;
-//    private IncidentSubmitProgressDialog incidentSubmitProgressDialog;
+    private IncidentSubmitTask incidentSubmitTask;
+    private IncidentSubmitProgressDialog incidentSubmitProgressDialog;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
 
-        if (null != savedInstanceState) {
-            incident = (Incident) savedInstanceState.get("incident");
-        } else {
-            incident = new Incident();
-        }
+        Log.d(getClass().getName(), "Incident = " + incident);
+
+//        if (null != savedInstanceState) {
+//            incident = (Incident) savedInstanceState.get("incident");
+//        } else {
+        incident = new Incident();
+//        }
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putSerializable("incident", incident);
-    }
+//    @Override
+//    public void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//        outState.putSerializable("incident", incident);
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -95,9 +100,9 @@ public class IncidentFragment extends TabSherlockFragment {
         sendButton = (ImageButton) view.findViewById(R.id.incident_send_button);
         description = (TextView) view.findViewById(R.id.incident_description);
         address = (TextView) view.findViewById(R.id.incident_address);
-        lastname = (TextView) view.findViewById(R.id.incident_lastname);
-        firstname = (TextView) view.findViewById(R.id.incident_firstname);
+        name = (TextView) view.findViewById(R.id.incident_name);
         email = (TextView) view.findViewById(R.id.incident_email);
+        pictureImageView = (ImageView) view.findViewById(R.id.incident_picture_preview);
 
         return view;
     }
@@ -109,9 +114,10 @@ public class IncidentFragment extends TabSherlockFragment {
         initSpinner();
         initButtons();
 
-//        if (null != incident.getBitmap()) {
-////            addPictureButton.setText(R.string.incident_change_picture);
-//        }
+        if (null != incident.getPictureUri()) {
+            pictureImageView.setImageURI(Uri.parse(incident.getPictureUri()));
+            pictureImageView.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -120,10 +126,9 @@ public class IncidentFragment extends TabSherlockFragment {
 
         if (null != getLastLocationAddressTask && getLastLocationAddressTask.getStatus() != AsyncTask.Status.FINISHED) {
             FragmentUtils.showDialog(getFragmentManager(), incidentLocationProgressDialog);
+        } else if (null != incidentSubmitTask && incidentSubmitTask.getStatus() != AsyncTask.Status.FINISHED) {
+            FragmentUtils.showDialog(getFragmentManager(), incidentSubmitProgressDialog);
         }
-//        else if (null != incidentSubmitTask && incidentSubmitTask.getStatus() != AsyncTask.Status.FINISHED) {
-//            FragmentUtils.showDialog(getFragmentManager(), incidentSubmitProgressDialog);
-//        }
     }
 
     @Override
@@ -201,6 +206,7 @@ public class IncidentFragment extends TabSherlockFragment {
 
         if (resultCode != Activity.RESULT_OK) {
             incident.setPictureUri(null);
+            pictureImageView.setVisibility(View.GONE);
             Toast.makeText(getActivity(), "Photo annulée", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -208,10 +214,19 @@ public class IncidentFragment extends TabSherlockFragment {
         // get full size picture real path
         try {
             Uri uri = Uri.parse(incident.getPictureUri());
-            String[] proj = {MediaStore.Images.Media.DATA};
-            Cursor cursor = getActivity().managedQuery(uri, proj, null, null, null);
+
+            // show pic
+            pictureImageView.setImageURI(uri);
+            pictureImageView.setVisibility(View.VISIBLE);
+
+//            String[] proj = {MediaStore.Images.Media.DATA};
+//            Cursor cursor = getActivity().managedQuery(uri, proj, null, null, null);
+//            cursor.moveToFirst();
+//            String path = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA));
+
+            Cursor cursor = getActivity().getContentResolver().query(uri, null, null, null, null);
             cursor.moveToFirst();
-            String path = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA));
+            String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA));
             incident.setPictureUri(path);
         } catch (Exception e) {
             Toast.makeText(getActivity(), "Impossible d'enregister la photo.", Toast.LENGTH_SHORT).show();
@@ -267,8 +282,7 @@ public class IncidentFragment extends TabSherlockFragment {
         incident.setDescription(description.getText().toString());
         incident.setAddress(address.getText().toString());
         incident.setEmail(email.getText().toString());
-        incident.setFirstname(firstname.getText().toString());
-        incident.setLastname(lastname.getText().toString());
+        incident.setName(name.getText().toString());
 
         // validation
         boolean valid = true;
@@ -289,17 +303,12 @@ public class IncidentFragment extends TabSherlockFragment {
             valid = false;
         }
 
-        if (StringUtils.isBlank(incident.getDescription())) {
+        if (StringUtils.isBlank(incident.getName())) {
             builder.append("nom, ");
             valid = false;
         }
 
-        if (StringUtils.isBlank(incident.getDescription())) {
-            builder.append("prénom, ");
-            valid = false;
-        }
-
-        if (StringUtils.isBlank(incident.getDescription())) {
+        if (StringUtils.isBlank(incident.getEmail())) {
             builder.append("email, ");
             valid = false;
         }
@@ -311,40 +320,55 @@ public class IncidentFragment extends TabSherlockFragment {
             return;
         }
 
-        prepareAndSendEmail();
+        startIncidentSubmitTask();
     }
 
-//    public void onIncidentSubmitTaskFinished(Boolean result) {
-//        // ugly fix for strange exception happening with rotation
-//        try {
-//            incidentSubmitProgressDialog.dismiss();
-//        } catch (Exception e) {
-//            Log.e(getClass().getName(), "Cannot dismiss IncidentSubmitProgressDialog", e);
-//        }
-//
-//        incidentSubmitTask = null;
-//
-//        if (result) {
-//            Toast.makeText(getActivity(), R.string.incident_submit_success, Toast.LENGTH_LONG).show();
-//            incidentTypesSpinner.setPromptId(0);
-//            address.setText("");
-//            description.setText("");
-//            firstname.setText("");
-//            lastname.setText("");
-//            email.setText("");
-//        } else {
-//            Toast.makeText(getActivity(), R.string.incident_submit_failed, Toast.LENGTH_LONG).show();
-//        }
-//    }
-//
-//    public void stopIncidentSubmitTaskIfRunning() {
-//        if (null == incidentSubmitTask) {
-//            return;
-//        }
-//
-//        incidentSubmitTask.cancel(true);
-//        incidentSubmitTask = null;
-//    }
+    public void startIncidentSubmitTask() {
+        stopIncidentSubmitTaskIfRunning();
+
+        if (null == incidentSubmitProgressDialog) {
+            incidentSubmitProgressDialog = new IncidentSubmitProgressDialog(this);
+        }
+
+        FragmentUtils.showDialog(getFragmentManager(), incidentSubmitProgressDialog);
+
+        incidentSubmitTask = new IncidentSubmitTask(incident, this);
+        incidentSubmitTask.execute();
+    }
+
+    public void onIncidentSubmitTaskFinished(Boolean result) {
+        // ugly fix for strange exception happening with rotation
+        try {
+            incidentSubmitProgressDialog.dismiss();
+        } catch (Exception e) {
+            Log.e(getClass().getName(), "Cannot dismiss IncidentSubmitProgressDialog", e);
+        }
+
+        incidentSubmitTask = null;
+
+        // reported with success, reset all fields and incident
+        if (result) {
+            Toast.makeText(getActivity(), R.string.incident_submit_success, Toast.LENGTH_LONG).show();
+            incidentTypesSpinner.setSelection(0);
+            address.setText("");
+            description.setText("");
+            name.setText("");
+            email.setText("");
+            pictureImageView.setVisibility(View.GONE);
+            incident = new Incident();
+        } else {
+            Toast.makeText(getActivity(), R.string.incident_submit_failed, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void stopIncidentSubmitTaskIfRunning() {
+        if (null == incidentSubmitTask) {
+            return;
+        }
+
+        incidentSubmitTask.cancel(true);
+        incidentSubmitTask = null;
+    }
 
     private void prepareAndSendEmail() {
         Intent intent = new Intent(Intent.ACTION_SEND);
@@ -396,8 +420,8 @@ public class IncidentFragment extends TabSherlockFragment {
         builder.append("Type d'incident : ").append(incident.getType()).append("\n");
         builder.append("Addresse : ").append(incident.getAddress()).append("\n");
         builder.append("Description : ").append(incident.getDescription()).append("\n");
-        builder.append("Nom : ").append(incident.getLastname()).append("\n");
-        builder.append("Prénom : ").append(incident.getFirstname()).append("\n");
+//        builder.append("Nom : ").append(incident.getLastname()).append("\n");
+//        builder.append("Prénom : ").append(incident.getFirstname()).append("\n");
         builder.append("Email : ").append(incident.getEmail()).append("\n\n");
 
         // lat/long exists from geocoder

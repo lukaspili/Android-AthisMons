@@ -10,13 +10,14 @@ import com.siu.android.athismons.R;
  */
 public class AgendaViewHolder extends SimpleViewHolder {
 
-    TextView title, category;
+    TextView title, category, date;
     ImageView image;
 
     @Override
     public void init() {
         category = (TextView) row.findViewById(R.id.agenda_row_category);
         title = (TextView) row.findViewById(R.id.agenda_row_title);
+        date = (TextView) row.findViewById(R.id.agenda_row_date);
         image = (ImageView) row.findViewById(R.id.agenda_row_image);
     }
 }

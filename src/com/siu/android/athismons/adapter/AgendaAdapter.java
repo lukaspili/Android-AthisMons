@@ -6,7 +6,6 @@ import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.siu.android.andutils.adapter.SimpleAdapter;
 import com.siu.android.athismons.R;
 import com.siu.android.athismons.dao.model.Agenda;
-import com.siu.android.athismons.dao.model.News;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
@@ -37,6 +36,7 @@ public class AgendaAdapter extends SimpleAdapter<Agenda, AgendaViewHolder> {
         }
 
         viewHolder.title.setText(agenda.getTitle());
+        viewHolder.date.setText(agenda.getDate());
     }
 
     @Override

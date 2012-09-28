@@ -38,23 +38,27 @@
             <!--android:textStyle="bold"-->
             <!--android:text="@string/incident_description_label"/>-->
 
-            <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+                            android:layout_marginTop="2dip">
 
                 <!-- locate button -->
                 <ImageButton android:id="@+id/incident_locate_button"
                              android:layout_width="wrap_content" android:layout_height="wrap_content"
                              android:layout_alignParentRight="true"
+                             android:layout_alignParentBottom="true"
                              android:src="@drawable/ic_locate"/>
 
                 <EditText android:id="@+id/incident_address"
                           android:layout_width="fill_parent" android:layout_height="wrap_content"
                           android:layout_toLeftOf="@id/incident_locate_button"
-                          android:layout_alignBottom="@id/incident_locate_button"
+                          android:layout_alignParentBottom="true"
+                          android:minLines="2"
                           android:hint="@string/incident_address_label"/>
             </RelativeLayout>
 
             <EditText android:id="@+id/incident_description"
                       android:layout_width="fill_parent" android:layout_height="wrap_content"
+                      android:minLines="2"
                       android:hint="@string/incident_description_label"/>
 
             <!-- address -->
@@ -70,9 +74,9 @@
             <!--android:textStyle="bold"-->
             <!--android:text="@string/incident_lastname_label"/>-->
 
-            <EditText android:id="@+id/incident_lastname"
+            <EditText android:id="@+id/incident_name"
                       android:layout_width="fill_parent" android:layout_height="wrap_content"
-                      android:hint="@string/incident_lastname_label"
+                      android:hint="@string/incident_name_label"
                       android:singleLine="true"/>
 
             <!-- first name -->
@@ -81,10 +85,10 @@
             <!--android:textStyle="bold"-->
             <!--android:text="@string/incident_firstname_label"/>-->
 
-            <EditText android:id="@+id/incident_firstname"
-                      android:layout_width="fill_parent" android:layout_height="wrap_content"
-                      android:hint="@string/incident_firstname_label"
-                      android:singleLine="true"/>
+            <!--<EditText android:id="@+id/incident_firstname"-->
+            <!--android:layout_width="fill_parent" android:layout_height="wrap_content"-->
+            <!--android:hint="@string/incident_firstname_label"-->
+            <!--android:singleLine="true"/>-->
 
             <!-- email -->
             <!--<TextView android:id="@+id/incident_email_label"-->
@@ -97,6 +101,13 @@
                       android:layout_marginBottom="15dip"
                       android:hint="@string/incident_email_label"
                       android:singleLine="true"/>
+
+            <ImageView android:id="@+id/incident_picture_preview"
+                       android:layout_width="200dip" android:layout_height="200dip"
+                       android:scaleType="fitCenter"
+                       android:layout_gravity="center_horizontal"
+                       android:layout_marginBottom="15dip"
+                       android:visibility="gone"/>
 
             <!-- picture button -->
             <ImageButton android:id="@+id/incident_add_picture_button"
@@ -113,6 +124,7 @@
                          android:layout_marginBottom="15dip"
                          android:src="@drawable/btn_send_incident"
                          android:background="@android:color/transparent"/>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

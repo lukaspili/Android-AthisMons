@@ -5,6 +5,8 @@
 
         <item name="homeAsUpIndicator">@drawable/ic_back</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_back</item>
+
+        <item name="android:windowBackground">@color/white</item>
     </style>
 
     <style name="Widget.App.Theme.ActionBar" parent="Widget.Sherlock.ActionBar">

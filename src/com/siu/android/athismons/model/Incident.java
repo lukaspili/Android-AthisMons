@@ -1,8 +1,5 @@
 package com.siu.android.athismons.model;
 
-import android.graphics.Bitmap;
-import android.net.Uri;
-
 import java.io.Serializable;
 
 /**
@@ -16,8 +13,7 @@ public class Incident implements Serializable {
     private String address;
     private String latitude;
     private String longitude;
-    private String firstname;
-    private String lastname;
+    private String name;
     private String email;
     private String pictureUri;
 
@@ -69,20 +65,12 @@ public class Incident implements Serializable {
         this.longitude = longitude;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {

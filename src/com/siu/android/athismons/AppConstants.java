@@ -14,6 +14,8 @@ public class AppConstants {
 
     public static final String PERSONAL_SPACE_URL = "https://athis-mons.espace-citoyens.net/Pages/ChoixPrincipal.aspx";
 
+    public static final String INCIDENT_URL = "http://www.mairie-athis-mons.fr/application/iphoneXml/incident.php";
+
     public static final String[] INCIDENT_EMAIL_GENERAL = {"pgoupil@mairie-athis-mons.fr", "klozes@mairie-athis-mons.fr"};
     public static final String[] INCIDENT_EMAIL_CAT1 = {"voirie@portesessonne.fr"};
     public static final String[] INCIDENT_EMAIL_CAT2 = {"domainepublic@portesessonne.fr"};

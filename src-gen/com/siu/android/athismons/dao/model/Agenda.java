@@ -15,6 +15,7 @@ public class Agenda implements java.io.Serializable, com.siu.android.athismons.m
     private String image;
     private String description;
     private String url;
+    private String date;
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
@@ -26,13 +27,14 @@ public class Agenda implements java.io.Serializable, com.siu.android.athismons.m
         this.id = id;
     }
 
-    public Agenda(Long id, String title, String category, String image, String description, String url) {
+    public Agenda(Long id, String title, String category, String image, String description, String url, String date) {
         this.id = id;
         this.title = title;
         this.category = category;
         this.image = image;
         this.description = description;
         this.url = url;
+        this.date = date;
     }
 
     public Long getId() {
@@ -81,6 +83,14 @@ public class Agenda implements java.io.Serializable, com.siu.android.athismons.m
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     // KEEP METHODS - put your custom methods here
